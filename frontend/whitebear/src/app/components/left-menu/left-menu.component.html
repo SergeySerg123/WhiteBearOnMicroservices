@@ -1,0 +1,11 @@
+<div class="left-menu"
+    [ngClass]="{'is-opened': isOpenedMenu}"
+    [ngClass]="{'is-closed': !isOpenedMenu}"
+    >
+    <div class="text-right text-white mt-2 mr-3">
+        <fa-icon [icon]="faTimes"
+            (click)="toggle()" 
+            className="cursor-pointer"
+            size="2x" ></fa-icon>
+    </div>               
+</div>
