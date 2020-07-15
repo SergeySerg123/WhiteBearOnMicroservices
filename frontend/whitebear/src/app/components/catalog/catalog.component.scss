@@ -1,0 +1,55 @@
+@import '../../../variables.scss';
+
+.shop-section {
+    margin-top: 70px;
+    padding-top: 30px;  
+    
+
+    .right-border {
+        border-right: 2px solid #f0f0f0;
+    }
+
+    .catalog-title {
+        font-size: 24pt;
+        font-weight: 700;
+    }
+
+    .category-title {
+        font-size: 14pt;   
+        margin: 20px 0;
+        font-weight: 600;
+        color: #a1a1a1;
+        
+        span {
+            cursor: pointer;
+        }
+
+        .item-title {
+            transition: all ease-in-out 0.3s;
+        }
+
+        .item-title:hover {
+            cursor: pointer;
+            color: $blue;
+        }
+        
+        .item-title.active {
+            color: $blue;
+        }
+    }
+
+    li {
+        list-style-type: none;
+        font-size: 12pt;
+        transition: all ease-in-out 0.3s;
+    }
+
+    li.active {
+        color: $blue;
+    }
+
+    li:hover {
+        color: #000;
+        color: $blue;
+    }
+}
