@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  @Input() public isOpenedCard: boolean;
-  @Input() public toggleCard: boolean;
+  @Input() public isOpenedCard: boolean = false;
+  @Input() public toggleCard: boolean = false;
 
   constructor() { }
 

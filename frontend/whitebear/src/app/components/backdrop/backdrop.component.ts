@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BackdropComponent implements OnInit {
   
-  @Input() public isOpenedMenu = false;
-  @Input() public isOpenedCard = false;
+  @Input() public isOpenedMenu: boolean = false;
+  @Input() public isOpenedCard: boolean = false;
 
   constructor() { }
 

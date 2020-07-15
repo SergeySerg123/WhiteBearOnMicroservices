@@ -10,8 +10,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 export class LeftMenuComponent implements OnInit {
   public faTimes = faTimes;
 
-  @Input() public isOpenedMenu: boolean;
-  @Input() public navbarToggle: boolean;
+  @Input() public isOpenedMenu: boolean = false;
+  @Input() public navbarToggle: boolean = false;
 
   constructor() { }
 
