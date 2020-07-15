@@ -1,0 +1,51 @@
+@import '../../../variables.scss'; 
+
+.card-area {
+    height: 100%;
+    width: 700px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: black;
+    z-index: 9999999;
+    background-color: #fff;
+    box-shadow: -2px 1px 5px 0px rgba(0,0,0,0.75);
+    padding: 20px 40px;
+    transition: ease-in-out all 0.3s;
+
+    svg {
+        color: $blue;
+    }
+
+    .card-logo {
+        position: absolute;
+        top: 50%;
+        opacity: 0.2;
+    }
+}
+
+.card-items-area {
+    position: relative;
+    height: 60%;
+
+    .card-delete-item-btn {
+        position: relative;
+        top: 40px;
+        left: -20px;
+        
+        
+    }
+
+}
+
+.card-sum-area {
+    height: 40%;
+}
+
+.is-opened-card {
+    transform: translateX(0%);
+}
+
+.is-closed-card {
+    transform: translateX(+100%);
+}

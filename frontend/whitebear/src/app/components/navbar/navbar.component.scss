@@ -1,0 +1,37 @@
+@import "../../../variables.scss";
+
+.header-main-style {
+    height: 70px;
+    position: fixed;
+    background-color: $blue;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    box-shadow:-1px -8px 9px 4px rgba(0,0,0,0.99);
+    
+}
+
+.navbar-btn {
+    cursor: pointer;
+}
+
+
+.card-counter {
+    background-color: $darkBlue;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    top: -10px;
+    font-weight: 500;
+    right: 5px;
+    position: absolute;
+}
+
+.card-counter-show {
+    visibility: visible;
+}
+
+.card-counter-hide {
+    visibility: hidden;
+}
