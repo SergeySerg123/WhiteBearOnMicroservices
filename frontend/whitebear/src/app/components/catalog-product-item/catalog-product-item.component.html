@@ -1,29 +1,29 @@
 <div class="product-item-card card">
-    <img class="card-img-top" width="100%" class="grey-background" src="" alt="Card image cap">
+    <img class="card-img-top" width="100%" class="grey-background" src="{{img}}" alt="Card image cap">
     <div class="card-body">
-        <div class="card-title">props.title</div>
+        <div class="card-title">Кроненбург</div>
         <div class="card-text">
-            <div class="card-text">props.description</div>
-            <div className="raiting">
+            <div class="card-text">Описание пива</div>
+            <div class="raiting">
                 <fa-icon [icon]="faStar"></fa-icon>
                 <fa-icon [icon]="faStar"></fa-icon>
                 <fa-icon [icon]="faStar"></fa-icon>
                 <fa-icon [icon]="faStar" class="raiting-negative"></fa-icon>
                 <fa-icon [icon]="faStar" class="raiting-negative"></fa-icon>
-                <span className="price-color">props.price грн. за кг</span>
+                <span class="price-color">50 грн. за кг</span>
             </div>
         </div>
-        <div className="d-flex justify-content-between">
-            <div className="counter-body d-flex alight-items-center justify-content-between">
+        <div class="d-flex justify-content-between">
+            <div class="counter-body d-flex alight-items-center justify-content-between">
                 <div>
                     <fa-icon (click)="dicrement()" [icon]="faMinus"></fa-icon>
                 </div>
-                <div className="counter-num">this.state.counter</div>
+                <div class="counter-num">1</div>
                 <div>
                     <fa-icon (click)="increment()" [icon]="faPlus"></fa-icon>
                 </div>
             </div>
-            <div className="bottle-container">
+            <div class="bottle-container">
                 <fa-icon size="2x" [icon]="faWineBottle"></fa-icon>
             </div>
             <button (click)="addToCard()" class="btn btn-primary btn-sm color-btn">
