@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BackdropComponent } from './components/backdrop/backdrop.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LeftMenuComponent } from './components/left-menu/left-menu.component';
+import { CatalogProductItemComponent } from './components/catalog-product-item/catalog-product-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LeftMenuComponent } from './components/left-menu/left-menu.component';
     CardComponent,
     NavbarComponent,
     BackdropComponent,
-    LeftMenuComponent
+    LeftMenuComponent,
+    CatalogProductItemComponent
   ],
   imports: [
     BrowserModule,
