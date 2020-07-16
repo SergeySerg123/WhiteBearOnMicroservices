@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faStar, faWineBottle, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { CardService } from 'src/app/services/card.service';
 
 @Component({
   selector: 'app-catalog-product-item',
@@ -14,7 +15,9 @@ export class CatalogProductItemComponent implements OnInit {
 
   public img = "../../../assets/pics/blanc.png";
 
-  constructor() { }
+  constructor(
+    private cardService: CardService
+  ) { }
 
   ngOnInit(): void {
   }
