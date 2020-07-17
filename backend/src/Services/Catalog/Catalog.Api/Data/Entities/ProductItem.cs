@@ -11,8 +11,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.Entities
         public decimal Price { get; set; }
         public EnumBeerTypes BeerType { get; set; }
         public double Density { get; set; } 
-        public string ImgId { get; set; }
-        public Image Img { get; set; }
+        public string PreviewImgUrl { get; set; }
         public string CategoryId { get; set; }
         public Category Category { get; set; }
         public string BrandId { get; set; }
