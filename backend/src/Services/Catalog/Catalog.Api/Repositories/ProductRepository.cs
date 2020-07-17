@@ -27,8 +27,12 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
                 query = query.Where(p => p.Brand.Id == brandId);
             }
 
-            query.Where(p => p.BeerType == type)
-                .Include(p => p.Img)
+            if (type != EnumBeerTypes.All)
+            {
+                query = query.Where(p => p.BeerType == type);
+            }
+
+            query.Include(p => p.Img)
                 .Include(p => p.Reactions)              
                 .Skip(pageIndex)
                 .Take(pageSize);
