@@ -16,7 +16,10 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
         public static void RegisterCustomServices(this IServiceCollection services)
         {
             services.AddScoped<ProductsService>();
+            services.AddScoped<CategoriesService>();
+
             services.AddScoped<IProductsRepository, ProductRepository>();
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
         }
 
         public static void RegisterAutoMapper(this IServiceCollection services)
