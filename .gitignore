@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+#VS 2019
+*backend/.vs/
+
+#Catalog Service
+*backend/src/Services/Catalog/Catalog.Api/obj
