@@ -8,7 +8,7 @@
         public decimal Price { get; set; }
         public int BeerType { get; set; }
         public double Density { get; set; }
-        public string PreviewImgUrl { get; set; }
+        public string PreviewImg { get; set; }
         public string CategoryId { get; set; }
         public string BrandId { get; set; }
     }
