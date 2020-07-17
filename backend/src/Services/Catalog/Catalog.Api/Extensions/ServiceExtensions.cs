@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Repositories;
+using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services;
 
 namespace WhiteBear.Services.Catalog.Api.Extensions
@@ -11,8 +12,8 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
     {
         public static void RegisterCustomServices(this IServiceCollection services)
         {
-            services.AddScoped<CatalogService>();
-            services.AddScoped<ICatalogRepository, CatalogRepository>();
+            services.AddScoped<ProductsService>();
+            services.AddScoped<IProductsRepository, ProductRepository>();
         }
 
         public static void SeedCustomData(this IServiceCollection services)
