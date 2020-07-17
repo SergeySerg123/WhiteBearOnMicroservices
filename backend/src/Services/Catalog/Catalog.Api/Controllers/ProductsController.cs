@@ -16,13 +16,13 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
             _productsService = productsService;
         }
 
-        //GET: /api/products/items/categories/{categories}/brands/{brands}/types/{types}?pageSize=50&pageIndex=1
+        //GET: /api/products/items/categories/{categoryId}/brands/{brandId}/types/{type}?pageSize=50&pageIndex=1
         [HttpGet]
-        [Route("items/category/{category:string}/brand/{brand:string}/type/{type:string}")]
-        public async Task<IActionResult> GetProducts(string categories, string brands, string types,
+        [Route("items/category/{category:string}/brand/{brand:string}/type/{type:int}")]
+        public async Task<IActionResult> GetProducts(string categoryId, string brandId, int type,
             [FromQuery] int pageSize = 50, [FromQuery]int pageIndex = 0)
         {
-            var products = await _productsService.GetProducts(category, brand, type, pageSize, pageIndex);
+            var products = await _productsService.GetProducts(categoryId, brandId, type, pageSize, pageIndex);
             return Ok(products);
         }
 
