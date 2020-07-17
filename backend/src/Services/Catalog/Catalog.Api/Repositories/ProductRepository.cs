@@ -32,7 +32,9 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
                 query = query.Where(p => p.BeerType == type);
             }
 
-            var items = await query.Include(p => p.Reactions)              
+            var items = await query.Include(p => p.Reactions)  
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
                 .Skip(pageIndex)
                 .Take(pageSize)
                 .AsNoTracking()
