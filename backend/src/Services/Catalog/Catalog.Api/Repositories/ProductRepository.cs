@@ -32,12 +32,36 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
                 query = query.Where(p => p.BeerType == type);
             }
 
-            query.Include(p => p.Img)
-                .Include(p => p.Reactions)              
+            var items = await query.Include(p => p.Reactions)              
                 .Skip(pageIndex)
-                .Take(pageSize);
+                .Take(pageSize)
+                .AsNoTracking()
+                .ToArrayAsync();
 
-            return await query.AsNoTracking().ToArrayAsync();
+            return items;
+        }
+
+        public async Task<ProductItem> GetProductItem(string id)
+        {
+            return await _context.ProductItems.FirstAsync(p => p.Id == id);
+        }
+
+        public async Task CreateProduct(ProductItem item)
+        {
+            await _context.ProductItems.AddAsync(item);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateProduct(ProductItem item)
+        {
+            _context.ProductItems.Update(item);
+            await _context.SaveChangesAsync();
+        }      
+
+        public async Task DeleteProduct(ProductItem item)
+        {
+            _context.ProductItems.Remove(item);
+            await _context.SaveChangesAsync();
         }
     }
 }
