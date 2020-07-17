@@ -14,7 +14,6 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
         }
 
         public DbSet<ProductItem> ProductItems { get; set; }
-        public DbSet<Image> Images { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
