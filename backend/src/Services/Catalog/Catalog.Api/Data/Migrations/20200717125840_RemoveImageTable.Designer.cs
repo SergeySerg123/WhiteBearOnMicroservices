@@ -12,9 +12,10 @@ using WhiteBear.Services.Catalog.Api.Data.Entities;
 namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class CatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20200717125840_RemoveImageTable")]
+    partial class RemoveImageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
