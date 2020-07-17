@@ -10,8 +10,7 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
             modelBuilder.Entity<ProductItem>()
                 .HasMany(p => p.Reactions)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasForeignKey(r => r.ProductItemId);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ProductItem>()
                 .HasOne(p => p.Brand)
@@ -22,13 +21,12 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
             modelBuilder.Entity<ProductItem>()
                 .HasOne(p => p.Category)
                 .WithMany()
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasForeignKey(c => c.CategoryId);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ProductItem>()
                 .HasOne(p => p.Img)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Reaction>()
                 .HasOne(r => r.ProductItem)
@@ -40,12 +38,13 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
                 .HasMany(c => c.ProductItems)
                 .WithOne()
                 .HasForeignKey(c => c.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Brands)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasForeignKey(c => c.CategoryId);
 
             modelBuilder.Entity<Brand>()
                 .HasOne(b => b.Category)
@@ -55,7 +54,7 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
             modelBuilder.Entity<Brand>()
                 .HasMany(b => b.ProductItems)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
