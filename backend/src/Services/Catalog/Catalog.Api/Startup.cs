@@ -25,6 +25,7 @@ namespace WhiteBear.Services.Catalog.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterCustomServices();
+            services.RegisterAutoMapper();
             services.RegisterCustomDbConnection(Configuration);
             services.SeedCustomData();
             services.AddMvc();
