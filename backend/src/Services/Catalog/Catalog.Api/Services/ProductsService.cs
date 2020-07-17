@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.DTO.ProductItem;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
-using WhiteBear.Services.Catalog.Api.Infrastructure.Exceptions;
+using static WhiteBear.Services.Catalog.Api.Extensions.Utils;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services.Abstract;
 
@@ -27,19 +27,7 @@ namespace WhiteBear.Services.Catalog.Api.Services
 
         public async Task CreateProduct(NewProductItemDTO newProductItemDTO)
         {
-            var type = GetEnumBeerTypeFromIntType(newProductItemDTO.BeerType);
-            var productItem = new ProductItem()
-            {
-                Name = newProductItemDTO.Name,
-                Description = newProductItemDTO.Description,
-                Discount = newProductItemDTO.Discount,
-                Price = newProductItemDTO.Price,
-                BeerType = type,
-                Density = newProductItemDTO.Density,
-                CategoryId = newProductItemDTO.CategoryId,
-                BrandId = newProductItemDTO.BrandId,
-                PreviewImgUrl = newProductItemDTO.PreviewImgUrl
-            };
+            var productItem = _mapper.Map<ProductItem>(newProductItemDTO);        
             await _productsRepository.CreateProduct(productItem);
         }
 
@@ -54,7 +42,7 @@ namespace WhiteBear.Services.Catalog.Api.Services
             oldProductItem.Price = productItem.Price;
             oldProductItem.BeerType = productItem.BeerType;
             oldProductItem.Density = productItem.Density;
-            oldProductItem.PreviewImgUrl = productItem.PreviewImgUrl;
+            oldProductItem.PreviewImg = productItem.PreviewImg;
             oldProductItem.CategoryId = productItem.CategoryId;
             oldProductItem.BrandId = productItem.BrandId;
 
@@ -65,21 +53,6 @@ namespace WhiteBear.Services.Catalog.Api.Services
         {
             var oldProductItem = await _productsRepository.GetProductItem(id);
             await _productsRepository.DeleteProduct(oldProductItem);
-        }
-
-        private EnumBeerTypes GetEnumBeerTypeFromIntType(int type)
-        {
-            switch(type)
-            {
-                case 0:
-                    return EnumBeerTypes.White;
-                case 1:
-                    return EnumBeerTypes.Dark;
-                case 2:
-                    return EnumBeerTypes.Unfiltered;
-                default:
-                    throw new CastEnumBeerTypeException();
-            }
-        }
+        }        
     }
 }
