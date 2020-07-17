@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using WhiteBear.Services.Catalog.Api.Data.MappingProfiles;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Repositories;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
@@ -14,6 +17,17 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
         {
             services.AddScoped<ProductsService>();
             services.AddScoped<IProductsRepository, ProductRepository>();
+        }
+
+        public static void RegisterAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<BrandProfile>();
+                cfg.AddProfile<CategoryProfile>();
+                cfg.AddProfile<ProductItemProfile>();
+            },
+            Assembly.GetExecutingAssembly());
         }
 
         public static void SeedCustomData(this IServiceCollection services)
