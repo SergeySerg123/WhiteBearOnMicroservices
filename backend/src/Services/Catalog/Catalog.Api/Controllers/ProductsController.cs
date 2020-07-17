@@ -29,13 +29,13 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //POST: /api/products/items
         [HttpPost]
         [Route("items")]
-        public async Task<IActionResult> AddProduct([FromBody]ProductItemDTO productItemDTO)
+        public async Task<IActionResult> CreateProduct([FromBody]NewProductItemDTO newProductItemDTO)
         {
-            var product = await _productsService.AddProduct(productItemDTO);
-            if (productItemDTO == null)
+            if (newProductItemDTO == null)
             {
                 return BadRequest();
             }
+            await _productsService.CreateProduct(newProductItemDTO);           
             return Ok();
         }
 
