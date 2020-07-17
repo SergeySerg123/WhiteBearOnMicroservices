@@ -25,6 +25,48 @@ namespace WhiteBear.Services.Catalog.Api.Services
             return _mapper.Map<ProductItemDTO[]>(products);
         }
 
+        public async Task CreateProduct(NewProductItemDTO newProductItemDTO)
+        {
+            var type = GetEnumBeerTypeFromIntType(newProductItemDTO.BeerType);
+            var productItem = new ProductItem()
+            {
+                Name = newProductItemDTO.Name,
+                Description = newProductItemDTO.Description,
+                Discount = newProductItemDTO.Discount,
+                Price = newProductItemDTO.Price,
+                BeerType = type,
+                Density = newProductItemDTO.Density,
+                CategoryId = newProductItemDTO.CategoryId,
+                BrandId = newProductItemDTO.BrandId,
+                PreviewImgUrl = newProductItemDTO.PreviewImgUrl
+            };
+            await _productsRepository.CreateProduct(productItem);
+        }
+
+        public async Task UpdateProduct(ProductItemDTO productItemDTO)
+        {
+            var productItem = _mapper.Map<ProductItem>(productItemDTO);
+            var oldProductItem = await _productsRepository.GetProductItem(productItem.Id);
+
+            oldProductItem.Name = productItem.Name;
+            oldProductItem.Description = productItem.Description;
+            oldProductItem.Discount = productItem.Discount;
+            oldProductItem.Price = productItem.Price;
+            oldProductItem.BeerType = productItem.BeerType;
+            oldProductItem.Density = productItem.Density;
+            oldProductItem.PreviewImgUrl = productItem.PreviewImgUrl;
+            oldProductItem.CategoryId = productItem.CategoryId;
+            oldProductItem.BrandId = productItem.BrandId;
+
+            await _productsRepository.UpdateProduct(oldProductItem);
+        }
+
+        public async Task DeleteProduct(string id)
+        {
+            var oldProductItem = await _productsRepository.GetProductItem(id);
+            await _productsRepository.DeleteProduct(oldProductItem);
+        }
+
         private EnumBeerTypes GetEnumBeerTypeFromIntType(int type)
         {
             switch(type)
