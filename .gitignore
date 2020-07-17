@@ -108,3 +108,4 @@ dist
 
 #Catalog Service
 *backend/src/Services/Catalog/Catalog.Api/obj
+*backend/src/Services/Catalog/Catalog.Api/bin
