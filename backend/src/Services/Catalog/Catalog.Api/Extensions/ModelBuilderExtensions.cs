@@ -23,11 +23,6 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<ProductItem>()
-                .HasOne(p => p.Img)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<Reaction>()
                 .HasOne(r => r.ProductItem)
                 .WithMany()
