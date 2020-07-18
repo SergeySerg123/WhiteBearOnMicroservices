@@ -3,12 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
+using WhiteBear.Services.Catalog.Api.Data.Entities.Abstraction;
 using WhiteBear.Services.Catalog.Api.Repositories.Abstract;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 
 namespace WhiteBear.Services.Catalog.Api.Repositories
 {
-    public class ProductRepository : BaseRepository, IProductsRepository
+    public class ProductRepository : BaseRepository<BaseEntity>, IProductsRepository
     {
         public ProductRepository(CatalogContext context) : base(context) { }
 
@@ -50,20 +51,17 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
 
         public async Task CreateProduct(ProductItem item)
         {
-            await _context.ProductItems.AddAsync(item);
-            await _context.SaveChangesAsync();
+            await base.CreateEntity(item);
         }
 
         public async Task UpdateProduct(ProductItem item)
         {
-            _context.ProductItems.Update(item);
-            await _context.SaveChangesAsync();
+            await base.UpdateEntity(item);
         }      
 
         public async Task DeleteProduct(ProductItem item)
         {
-            _context.ProductItems.Remove(item);
-            await _context.SaveChangesAsync();
+            await base.DeleteEntity(item);
         }
     }
 }
