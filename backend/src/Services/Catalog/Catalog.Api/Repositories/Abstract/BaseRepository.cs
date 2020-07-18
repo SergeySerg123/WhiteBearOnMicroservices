@@ -4,7 +4,7 @@ using WhiteBear.Services.Catalog.Api.Data.Entities.Abstraction;
 
 namespace WhiteBear.Services.Catalog.Api.Repositories.Abstract
 {
-    public class BaseRepository<T> where T : BaseEntity
+    public abstract class BaseRepository<T> where T : BaseEntity
     {
         private protected readonly CatalogContext _context;
 
