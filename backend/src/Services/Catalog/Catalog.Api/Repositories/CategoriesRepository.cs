@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
