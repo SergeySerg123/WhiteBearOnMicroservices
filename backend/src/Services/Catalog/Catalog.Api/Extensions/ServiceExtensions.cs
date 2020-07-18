@@ -31,6 +31,7 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
                 cfg.AddProfile<BrandProfile>();
                 cfg.AddProfile<CategoryProfile>();
                 cfg.AddProfile<ProductItemProfile>();
+                cfg.AddProfile<ReactionProfile>();
             },
             Assembly.GetExecutingAssembly());
         }
