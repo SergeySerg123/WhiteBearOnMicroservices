@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using WhiteBear.Services.Catalog.Api.Data.DTO.Category;
 using WhiteBear.Services.Catalog.Api.Services;
 
 namespace WhiteBear.Services.Catalog.Api.Controllers
@@ -24,12 +25,12 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
             return Ok(categories);
         }
 
-        //GET: api/categories/items/{name}
+        //GET: api/categories/items/{id}
         [HttpGet]
-        [Route("items/{name}")]
-        public async Task<IActionResult> GetCategoryByName(string name)
+        [Route("items/{id}")]
+        public async Task<IActionResult> GetCategoryById(string id)
         {
-            var category = await _categoriesService.GetCategoryByName(name);
+            var category = await _categoriesService.GetCategoryById(id);
             return Ok(category);
         }
 
@@ -47,7 +48,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         [Route("items")]
         public async Task<IActionResult> UpdateCategory(CategoryDTO categoryDTO)
         {
-
+            await _categoriesService.UpdateCategory(categoryDTO);
             return Ok();
         }
 
@@ -56,7 +57,8 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         [Route("items/{id}")]
         public async Task<IActionResult> DeleteCategory(string id)
         {
-            return Ok();
+            await _categoriesService.DeleteCategory(id);
+            return NoContent();
         }
     }
 }
