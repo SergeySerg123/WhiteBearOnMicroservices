@@ -45,6 +45,7 @@ namespace WhiteBear.Services.Catalog.Api.Services
             oldProductItem.PreviewImg = productItem.PreviewImg;
             oldProductItem.CategoryId = productItem.CategoryId;
             oldProductItem.BrandId = productItem.BrandId;
+            oldProductItem.UpdatedAt = productItem.CreatedAt;
 
             await _productsRepository.UpdateProduct(oldProductItem);
         }
