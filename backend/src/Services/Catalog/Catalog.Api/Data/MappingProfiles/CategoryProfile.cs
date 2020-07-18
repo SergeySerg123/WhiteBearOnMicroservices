@@ -10,6 +10,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.MappingProfiles
         {
             CreateMap<CategoryDTO, Category>();
             CreateMap<Category, CategoryDTO>();
+            CreateMap<NewCategoryDTO, Category>();
         }
     }
 }
