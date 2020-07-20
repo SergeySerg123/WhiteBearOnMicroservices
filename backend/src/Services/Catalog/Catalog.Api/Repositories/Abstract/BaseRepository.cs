@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.Context;
+using WhiteBear.Services.Catalog.Api.Data.Entities;
 using WhiteBear.Services.Catalog.Api.Data.Entities.Abstraction;
 
 namespace WhiteBear.Services.Catalog.Api.Repositories.Abstract
@@ -8,27 +10,28 @@ namespace WhiteBear.Services.Catalog.Api.Repositories.Abstract
     {
         private protected readonly CatalogContext _context;
 
-        public BaseRepository(CatalogContext context)
+        protected BaseRepository(CatalogContext context)
         {
             _context = context;
         }
 
-        public async Task CreateEntity(T entity)
+        public async Task<T> CreateEntity(T entity) 
         {
-            await _context.Set<T>().AddAsync(entity);
+            var result = await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
+            return result.Entity;
         }
-
-        public async Task UpdateEntity(T entity)
+        public async Task<T> UpdateEntity(T entity)
         {
-            _context.Set<T>().Update(entity);
+            var result = _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
+            return result.Entity;
         }
-
-        public async Task DeleteEntity(T entity)
+        public async Task<T> DeleteEntity(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            var result = _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
+            return result.Entity;
         }
     }
 }
