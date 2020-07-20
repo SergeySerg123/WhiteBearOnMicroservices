@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.DTO.Category;
-using WhiteBear.Services.Catalog.Api.Services;
+using WhiteBear.Services.Catalog.Api.Services.Interfaces;
 
 namespace WhiteBear.Services.Catalog.Api.Controllers
 {
@@ -9,9 +9,9 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
     [Route("api/Categories")]
     public class CategoriesController : Controller
     {
-        private readonly CategoriesService _categoriesService;
+        private readonly ICategoriesService _categoriesService;
 
-        public CategoriesController(CategoriesService categoriesService)
+        public CategoriesController(ICategoriesService categoriesService)
         {
             _categoriesService = categoriesService;
         }
