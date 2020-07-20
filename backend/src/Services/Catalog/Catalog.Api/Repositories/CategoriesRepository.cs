@@ -32,19 +32,19 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
         }
 
 
-        public async Task CreateCategory(Category item)
+        public async Task<Category> CreateCategory(Category item)
         {
-            await base.CreateEntity(item);
+            return await base.CreateEntity(item) as Category;
         }
 
-        public async Task UpdateCategory(Category item)
+        public async Task<Category> UpdateCategory(Category item)
         {
-            await base.UpdateEntity(item);
+            return await base.UpdateEntity(item) as Category;
         }
 
-        public async Task DeleteCategory(Category item)
+        public async Task<Category> DeleteCategory(Category item)
         {
-            await base.DeleteEntity(item);
+            return await base.DeleteEntity(item) as Category;
         }   
     }
 }
