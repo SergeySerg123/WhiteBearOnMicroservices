@@ -37,7 +37,39 @@ namespace Catalog.Api.Tests.Repositories
             _mapper = mockMapper.CreateMapper();
         }
 
+        [Fact]
+        public async Task Get_Category_Item_Return_Exist_Category()
+        {
+            using (var context = new CatalogContext(_options))
+            {
+                // Arrange
+                var repo = new CategoriesRepository(context);
+                await repo.CreateCategory(new Category { Id="1", Name = "Test" });
 
+                // Act
+                var category = await repo.GetCategoryItem("1");
+
+                // Assert
+                Assert.NotNull(category);
+            }
+        }
+
+        [Fact]
+        public async Task Get_Not_Exist_Category_Item_Then_Return_Null()
+        {
+            using (var context = new CatalogContext(_options))
+            {
+                // Arrange
+                var repo = new CategoriesRepository(context);
+                await repo.CreateCategory(new Category { Id = "1", Name = "Test" });
+
+                // Act
+                var category = await repo.GetCategoryItem("2");
+
+                // Assert
+                Assert.Null(category);
+            }
+        }
 
         [Fact]
         public async Task Create_Category_Then_Return_Single_Category()
