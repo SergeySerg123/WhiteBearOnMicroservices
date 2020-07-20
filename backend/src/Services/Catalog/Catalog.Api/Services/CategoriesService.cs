@@ -4,10 +4,11 @@ using WhiteBear.Services.Catalog.Api.Data.DTO.Category;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services.Abstract;
+using WhiteBear.Services.Catalog.Api.Services.Interfaces;
 
 namespace WhiteBear.Services.Catalog.Api.Services
 {
-    public class CategoriesService : BaseService
+    public class CategoriesService : BaseService, ICategoriesService
     {
         private readonly ICategoriesRepository _categoriesRepository;
 
