@@ -12,9 +12,10 @@ using WhiteBear.Services.Catalog.Api.Data.Entities;
 namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class CatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20200720142347_UpdateCategoryNameIsRequired")]
+    partial class UpdateCategoryNameIsRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
