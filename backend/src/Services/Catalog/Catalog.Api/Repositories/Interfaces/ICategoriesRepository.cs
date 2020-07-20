@@ -7,8 +7,8 @@ namespace WhiteBear.Services.Catalog.Api.Repositories.Interfaces
     {
         Task<Category[]> GetCategories();
         Task<Category> GetCategoryItem(string id);
-        Task<Category> CreateCategory(Category item);
-        Task<Category> UpdateCategory(Category item);
-        Task<Category> DeleteCategory(Category item);
+        Task CreateCategory(Category item);
+        Task UpdateCategory(Category item);
+        Task DeleteCategory(Category item);
     }
 }
