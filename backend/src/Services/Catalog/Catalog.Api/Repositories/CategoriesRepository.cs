@@ -28,23 +28,23 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
             return await _context.Categories
                     .Include(c => c.ProductItems)
                     .Include(c => c.Brands)
-                    .SingleAsync(c => c.Id == id);
+                    .SingleOrDefaultAsync(c => c.Id == id);
         }
 
 
-        public async Task<Category> CreateCategory(Category item)
+        public async Task CreateCategory(Category item)
         {
-            return await base.CreateEntity(item) as Category;
+            await base.CreateEntity(item);
         }
 
-        public async Task<Category> UpdateCategory(Category item)
+        public async Task UpdateCategory(Category item)
         {
-            return await base.UpdateEntity(item) as Category;
+            await base.UpdateEntity(item);
         }
 
-        public async Task<Category> DeleteCategory(Category item)
+        public async Task DeleteCategory(Category item)
         {
-            return await base.DeleteEntity(item) as Category;
+            await base.DeleteEntity(item);
         }   
     }
 }
