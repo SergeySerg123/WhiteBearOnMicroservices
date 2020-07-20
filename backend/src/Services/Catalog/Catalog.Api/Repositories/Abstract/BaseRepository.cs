@@ -15,23 +15,20 @@ namespace WhiteBear.Services.Catalog.Api.Repositories.Abstract
             _context = context;
         }
 
-        public async Task<T> CreateEntity(T entity) 
+        public async Task CreateEntity(T entity) 
         {
-            var result = await _context.Set<T>().AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
-            return result.Entity;
         }
-        public async Task<T> UpdateEntity(T entity)
+        public async Task UpdateEntity(T entity)
         {
-            var result = _context.Set<T>().Update(entity);
+            _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
-            return result.Entity;
         }
-        public async Task<T> DeleteEntity(T entity)
+        public async Task DeleteEntity(T entity)
         {
-            var result = _context.Set<T>().Remove(entity);
+            _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
-            return result.Entity;
         }
     }
 }
