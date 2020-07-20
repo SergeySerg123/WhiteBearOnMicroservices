@@ -8,6 +8,7 @@ using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Repositories;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services;
+using WhiteBear.Services.Catalog.Api.Services.Interfaces;
 
 namespace WhiteBear.Services.Catalog.Api.Extensions
 {
@@ -16,7 +17,7 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
         public static void RegisterCustomServices(this IServiceCollection services)
         {
             services.AddScoped<ProductsService>();
-            services.AddScoped<CategoriesService>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<BrandsService>();
 
             services.AddScoped<IProductsRepository, ProductRepository>();
