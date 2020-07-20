@@ -18,7 +18,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
 
         //GET: /api/products/items/categories/{categoryId}/brands/{brandId}/types/{type}?pageSize=50&pageIndex=1
         [HttpGet]
-        [Route("items/category/{category:string}/brand/{brand:string}/type/{type:int}")]
+        [Route("items/category/{category}/brand/{brand}/type/{type}")]
         public async Task<IActionResult> GetProducts(string categoryId, string brandId, int type,
             [FromQuery] int pageSize = 50, [FromQuery]int pageIndex = 0)
         {
@@ -41,7 +41,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
 
         //PUT: /api/products/items/{id}
         [HttpPut]
-        [Route("items/{id:string}")]
+        [Route("items/{id}")]
         public async Task<IActionResult> UpdateProduct(ProductItemDTO productItemDTO)
         {
             await _productsService.UpdateProduct(productItemDTO);
@@ -50,7 +50,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
 
         //DELETE: /api/products/items/{id}
         [HttpDelete]
-        [Route("items/{id:string}")]
+        [Route("items/{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
             await _productsService.DeleteProduct(id);
