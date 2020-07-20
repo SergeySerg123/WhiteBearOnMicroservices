@@ -28,6 +28,18 @@ namespace WhiteBear.Services.Catalog.Api
             services.RegisterAutoMapper();
             services.RegisterCustomDbConnection(Configuration);
             services.SeedCustomData();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.DescribeAllEnumsAsStrings();
+                options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
+                {
+                    Title = "Product catalog API for ShopOnMicroservices",
+                    Version = "v1"
+                });
+            });
+
+
             services.AddMvc();
         }
 
@@ -37,6 +49,12 @@ namespace WhiteBear.Services.Catalog.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger()
+               .UseSwaggerUI(c =>
+               {
+                   c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductCatalogAPI v1");
+               });
             }
 
             app.UseMvc();
