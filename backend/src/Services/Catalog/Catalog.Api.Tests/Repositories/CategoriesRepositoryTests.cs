@@ -23,12 +23,6 @@ namespace Catalog.Api.Tests.Repositories
         private readonly IMapper _mapper;
         private readonly DbContextOptions<CatalogContext> _options;
 
-        private Category[] categories =
-        {
-            new Category() { Id = "1", Name = "Test" },
-            new Category() { Id = "2", Name = "Test2" }
-        };
-
         public CategoriesRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<CatalogContext>()
@@ -43,6 +37,8 @@ namespace Catalog.Api.Tests.Repositories
             _mapper = mockMapper.CreateMapper();
         }
 
+
+
         [Fact]
         public async Task Create_Category_Then_Return_Single_Category()
         {
@@ -56,26 +52,56 @@ namespace Catalog.Api.Tests.Repositories
                 var categories = await repo.GetCategories();
 
                 // Assert
-                Assert.NotNull(categories);
                 Assert.Single(categories);
             } 
         }
 
         [Fact]
-        public async Task Create_Category_With_Null__Name_Then_Throw_Exception()
+        public async Task Update_Category_Name_Then__Return_Category_With_New_Name()
         {
             using (var context = new CatalogContext(_options))
             {
                 // Arrange
                 var repo = new CategoriesRepository(context);
-                await repo.CreateCategory(new Category { Name = null });
 
-                // Act
-                var categories = await repo.GetCategories();
+                // Act - 1
+                await repo.CreateCategory(new Category { Id="1", Name = "TestName" });
+                var c = await repo.GetCategoryItem("1");
 
-                // Assert
-                Assert.NotNull(categories);
-                Assert.Single(categories);
+                // Assert - 1
+                Assert.Equal("TestName", c.Name);
+
+                // Act - 2
+                c.Name = "Test-2";
+                await repo.UpdateCategory(c);
+                var c2 = await repo.GetCategoryItem("1");
+                
+                // Assert - 2
+                Assert.Equal("Test-2", c2.Name);
+            }
+        }
+
+        [Fact]
+        public async Task Delete_Category_Then__Return_Null()
+        {
+            using (var context = new CatalogContext(_options))
+            {
+                // Arrange
+                var repo = new CategoriesRepository(context);
+
+                // Act - 1
+                await repo.CreateCategory(new Category { Id = "1", Name = "TestName" });
+                var c = await repo.GetCategoryItem("1");
+
+                // Assert - 1
+                Assert.NotNull(c);
+
+                // Act - 2;
+                await repo.DeleteCategory(c);
+                var c2 = await repo.GetCategoryItem("1");
+
+                // Assert - 2
+                Assert.Null(c2);
             }
         }
 
@@ -96,7 +122,7 @@ namespace Catalog.Api.Tests.Repositories
         //    _mockRepository.Setup(x => x.GetCategories())
         //        .ReturnsAsync(this.categories);                      
         //    var service = new CategoriesService(_mockRepository.Object, _mapper);
-            
+
 
         //    // Act
         //    var categories = await service.GetCategories();
