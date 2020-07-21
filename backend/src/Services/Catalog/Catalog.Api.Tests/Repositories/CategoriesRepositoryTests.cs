@@ -1,12 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Moq;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
 using WhiteBear.Services.Catalog.Api.Repositories;
-using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
-using WhiteBear.Services.Catalog.Api.Data.MappingProfiles;
 using Xunit;
 using System;
 
@@ -14,8 +10,7 @@ namespace Catalog.Api.Tests.Repositories
 {
     public class CategoriesRepositoryTests : IDisposable
     {
-        private readonly Mock<ICategoriesRepository> _mockRepository;
-        private readonly IMapper _mapper;
+        
         private readonly DbContextOptions<CatalogContext> _options;
         private readonly CatalogContext _context;
         private readonly CategoriesRepository _categoriesRepository;
@@ -28,16 +23,7 @@ namespace Catalog.Api.Tests.Repositories
 
             _context = new CatalogContext(_options);
 
-            _categoriesRepository = new CategoriesRepository(_context);
-
-            _mockRepository = new Mock<ICategoriesRepository>();
-
-            var mockMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new CategoryProfile());
-            });
-
-            _mapper = mockMapper.CreateMapper();
+            _categoriesRepository = new CategoriesRepository(_context);    
         }
 
         [Fact]
