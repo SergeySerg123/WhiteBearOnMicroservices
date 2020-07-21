@@ -51,7 +51,7 @@ namespace WhiteBear.Services.Catalog.Api.Services
 
             if (category.Id == null || category.Name == null)
             {
-                throw new NullPropsEntityException("Properties 'Name' and 'CreatedAt' can't be a null.");
+                throw new NullPropsEntityException("Properties 'Id' and 'Name' can't be a null.");
             }
 
             var oldCategory = await _categoriesRepository.GetCategoryItem(category.Id);
@@ -64,7 +64,17 @@ namespace WhiteBear.Services.Catalog.Api.Services
 
         public async Task DeleteCategory(string id)
         {
+            if (id == null)
+            {
+                throw new NullPropsEntityException("Property 'id' can't be a null.");
+            }
             var oldCategory = await _categoriesRepository.GetCategoryItem(id);
+
+            if (oldCategory == null)
+            {
+                throw new NotFoundEntityException($"Category with id: {id} not found.");
+            }
+
             await _categoriesRepository.DeleteCategory(oldCategory);
         }
     }
