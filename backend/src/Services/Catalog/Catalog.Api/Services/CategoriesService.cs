@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.DTO.Category;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
+using WhiteBear.Services.Catalog.Api.Infrastructure.Exceptions;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services.Abstract;
 using WhiteBear.Services.Catalog.Api.Services.Interfaces;
@@ -24,7 +25,12 @@ namespace WhiteBear.Services.Catalog.Api.Services
 
         public async Task<Category> GetCategoryById(string id)
         {
-            return await _categoriesRepository.GetCategoryItem(id);
+            var category = await _categoriesRepository.GetCategoryItem(id);
+            if (category == null)
+            {
+                throw new NotFoundEntityException($"Category with id: {id} not found.");
+            }
+            return category;
         }
 
         public async Task CreateCategory(NewCategoryDTO newCategoryDTO)
