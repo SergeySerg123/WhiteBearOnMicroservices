@@ -36,14 +36,26 @@ namespace WhiteBear.Services.Catalog.Api.Services
         public async Task CreateCategory(NewCategoryDTO newCategoryDTO)
         {
             var category = _mapper.Map<Category>(newCategoryDTO);
+            
+            if(category.Name == null)
+            {
+                throw new NullPropsEntityException("Property 'Name' can't be a null.");
+            }
+
             await _categoriesRepository.CreateCategory(category);
         }
 
         public async Task UpdateCategory(CategoryDTO categoryDTO)
         {
             var category = _mapper.Map<Category>(categoryDTO);
-            var oldCategory = await _categoriesRepository.GetCategoryItem(category.Id);
 
+            if (category.Id == null || category.Name == null)
+            {
+                throw new NullPropsEntityException("Properties 'Name' and 'CreatedAt' can't be a null.");
+            }
+
+            var oldCategory = await _categoriesRepository.GetCategoryItem(category.Id);
+            
             oldCategory.Name = category.Name;
             oldCategory.UpdatedAt = category.CreatedAt;
 
