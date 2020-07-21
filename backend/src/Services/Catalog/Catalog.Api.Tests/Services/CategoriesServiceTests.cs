@@ -125,5 +125,32 @@ namespace Catalog.Api.Tests.Services
                     Name = name
                 }));
         }
+
+        [Theory]
+        [InlineData("1")]
+        public async Task Delete_Category_With_Exist_Id_Then_No_Exception(string id)
+        {
+            _mockRepository.Setup(x => x.UpdateCategory(It.IsAny<Category>()));
+            _mockRepository.Setup(x => x.GetCategoryItem(It.Is<string>(s => s.Equals("1"))))
+                .ReturnsAsync(new Category() { Id = "1", Name = "Test" });
+
+            await _categoriesService.DeleteCategory(id);
+        }
+
+        [Theory]
+        [InlineData("2")]
+        public async Task Delete_Category_With_Wrong_Id_Then_Throw_NotFoundEntityException(string id)
+        {
+            await Assert.ThrowsAsync<NotFoundEntityException>(() =>
+                _categoriesService.DeleteCategory(id));
+        }
+
+        [Theory]
+        [InlineData(null)]
+        public async Task Delete_Category_With_Null_Id_Then_Throw_NotFoundEntityException(string id)
+        {
+            await Assert.ThrowsAsync<NullPropsEntityException>(() =>
+                _categoriesService.DeleteCategory(id));
+        }
     }
 }
