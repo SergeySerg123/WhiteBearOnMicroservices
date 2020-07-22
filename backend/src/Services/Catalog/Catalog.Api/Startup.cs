@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WhiteBear.Services.Catalog.Api.Extensions;
+using WhiteBear.Services.Catalog.Api.Filters;
 
 namespace WhiteBear.Services.Catalog.Api
 {
@@ -39,8 +40,7 @@ namespace WhiteBear.Services.Catalog.Api
                 });
             });
 
-
-            services.AddMvc();
+            services.AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
