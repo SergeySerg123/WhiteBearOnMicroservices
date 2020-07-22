@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using WhiteBear.Services.Catalog.Api.Data.Entities.Abstraction;
+using WhiteBear.Services.Catalog.Api.Enums;
 
 namespace WhiteBear.Services.Catalog.Api.Data.Entities
 {
