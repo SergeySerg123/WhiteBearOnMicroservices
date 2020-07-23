@@ -20,7 +20,7 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<BrandsService>();
 
-            services.AddScoped<IProductsRepository, ProductRepository>();
+            services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.AddScoped<IBrandsRepository, BrandsRepository>();
         }
