@@ -116,6 +116,7 @@ namespace Catalog.Api.Tests.Repositories
         public void Dispose()
         {
             _context.Database.EnsureDeleted();
+            GC.Collect();
         }    
     }
 }
