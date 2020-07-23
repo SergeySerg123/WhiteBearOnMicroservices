@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using WhiteBear.Services.Catalog.Api.Extensions;
 using WhiteBear.Services.Catalog.Api.Filters;
 
@@ -51,10 +45,10 @@ namespace WhiteBear.Services.Catalog.Api
                 app.UseDeveloperExceptionPage();
 
                 app.UseSwagger()
-               .UseSwaggerUI(c =>
-               {
-                   c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductCatalogAPI v1");
-               });
+                   .UseSwaggerUI(c =>
+                   {
+                       c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductCatalogAPI v1");
+                   });
             }
 
             app.UseMvc();
