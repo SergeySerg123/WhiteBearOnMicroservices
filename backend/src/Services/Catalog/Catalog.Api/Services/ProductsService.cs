@@ -5,6 +5,7 @@ using WhiteBear.Services.Catalog.Api.Data.Entities;
 using static WhiteBear.Services.Catalog.Api.Extensions.Utils;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services.Abstract;
+using WhiteBear.Services.Catalog.Api.Enums;
 
 namespace WhiteBear.Services.Catalog.Api.Services
 {
