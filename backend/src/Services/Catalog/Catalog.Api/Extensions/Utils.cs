@@ -1,4 +1,4 @@
-﻿using WhiteBear.Services.Catalog.Api.Data.Entities;
+﻿using WhiteBear.Services.Catalog.Api.Enums;
 using WhiteBear.Services.Catalog.Api.Infrastructure.Exceptions;
 
 namespace WhiteBear.Services.Catalog.Api.Extensions
