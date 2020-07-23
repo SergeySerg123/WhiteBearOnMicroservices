@@ -7,5 +7,10 @@ namespace WhiteBear.Services.Catalog.Api.Infrastructure.Exceptions
         public NotFoundEntityException(string message) : base(message)
         {
         }
+
+        public NotFoundEntityException()
+        {
+
+        }
     }
 }
