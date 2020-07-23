@@ -5,16 +5,15 @@
         ></app-backdrop> 
     <app-left-menu
         [isOpenedMenu]="isOpenedMenu"
-        [navbarToggle]="toggleNavbar()"
+      
         ></app-left-menu>
     <app-card 
         [isOpenedCard]="isOpenedCard"  
-        [toggleCard]="toggleCard()" 
+        
         ></app-card>
     <div class="container">
         <div class="row pt-3">
             <div class="col-sm-4 d-flex align-items-center">
-                <fa-icon size="2x" [icon]="faBars" class="navbar-btn"></fa-icon>
                 <fa-icon size="2x" [icon]="faBars" class="navbar-btn" (click)="toggleNavbar()"></fa-icon>
                 <div class="d-inline-block ml-3">MENU</div>
             </div>

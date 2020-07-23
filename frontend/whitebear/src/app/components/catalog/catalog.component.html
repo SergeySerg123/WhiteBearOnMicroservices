@@ -1,1 +1,58 @@
-<p>catalog works!</p>
+<app-navbar></app-navbar>
+<div class="shop-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2 right-border pl-3">
+          <div class="catalog-title">
+            <span>Пропозиції</span>
+          </div>
+          <div class="category-title">
+            <span class="item-title">Всі пропозиції</span>
+          </div>
+          <div class="category-title">
+            <span class="item-title active">Пиво</span>
+            <ul>
+              <li class="active">Біле</li>
+              <li>Світле</li>
+              <li>Темне</li>
+            </ul>
+          </div>
+          <div class="category-title">
+            <span class="item-title">Слабоалкогольні напої</span>
+            <ul>
+              <li>Сідр</li>
+              <li>Винний ель</li>
+              <li>Бірмікс</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-10">
+          <div class="row">
+
+            <!-- INSERT SCKELET LOADING -->
+          <!-- <div class="col-xs-3">
+              <ProductItemEmpty />
+            </div> -->
+            
+            
+            <!-- INSERT LOOP OF PRODUCTS -->
+            <div class="col-sm-3">
+              <app-catalog-product-item></app-catalog-product-item>
+            </div>
+            <div class="col-sm-3">
+              <app-catalog-product-item></app-catalog-product-item>
+            </div>
+            <div class="col-sm-3">
+              <app-catalog-product-item></app-catalog-product-item>
+            </div>
+            <div class="col-sm-3">
+              <app-catalog-product-item></app-catalog-product-item>
+            </div>
+              
+              
+              <!-- INSERT LOOP OF PRODUCTS -->
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -11,8 +11,8 @@ export class NavbarComponent implements OnInit {
   public faSearch = faSearch;
   public faShoppingCart = faShoppingCart;
 
-  public isOpenedMenu = false;
-  public isOpenedCard = false;
+  public isOpenedMenu: boolean = false;
+  public isOpenedCard: boolean = false;
 
   public items = [];
 
@@ -30,14 +30,10 @@ export class NavbarComponent implements OnInit {
   }
 
   public toggleNavbar() {
-
+    this.isOpenedMenu = !this.isOpenedMenu;
   }
 
   public toggleCard() {
-
-  }
-
-  public isWhiteHeader() {
-
+    this.isOpenedCard = !this.isOpenedCard;
   }
 }
