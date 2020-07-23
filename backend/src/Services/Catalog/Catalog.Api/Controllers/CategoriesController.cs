@@ -19,7 +19,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //GET: api/categories/items
         [HttpGet]
         [Route("items")]
-        public async Task<IActionResult> GetCategories()
+        public async Task<ActionResult> GetCategories()
         {
             var categories = await _categoriesService.GetCategories();
             return Ok(categories);
@@ -28,7 +28,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //GET: api/categories/items/{id}
         [HttpGet]
         [Route("items/{id}")]
-        public async Task<IActionResult> GetCategoryById(string id)
+        public async Task<ActionResult> GetCategoryById(string id)
         {
             var category = await _categoriesService.GetCategoryById(id);
             return Ok(category);
@@ -37,7 +37,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //POST: api/categories/items
         [HttpPost]
         [Route("items")]
-        public async Task<IActionResult> CreateCategory(NewCategoryDTO newCategoryDTO)
+        public async Task<ActionResult> CreateCategory(NewCategoryDTO newCategoryDTO)
         {
             await _categoriesService.CreateCategory(newCategoryDTO);
             return Ok();
@@ -46,7 +46,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //PUT: api/categories/items
         [HttpPut]
         [Route("items")]
-        public async Task<IActionResult> UpdateCategory(CategoryDTO categoryDTO)
+        public async Task<ActionResult> UpdateCategory(CategoryDTO categoryDTO)
         {
             await _categoriesService.UpdateCategory(categoryDTO);
             return Ok();
@@ -55,7 +55,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //DELETE: api/categories/items/{id}
         [HttpDelete]
         [Route("items/{id}")]
-        public async Task<IActionResult> DeleteCategory(string id)
+        public async Task<ActionResult> DeleteCategory(string id)
         {
             await _categoriesService.DeleteCategory(id);
             return NoContent();
