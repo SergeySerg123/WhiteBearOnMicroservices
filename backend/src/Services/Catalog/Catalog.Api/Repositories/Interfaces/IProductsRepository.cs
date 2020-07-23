@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
+using WhiteBear.Services.Catalog.Api.Enums;
 
 namespace WhiteBear.Services.Catalog.Api.Repositories.Interfaces
 {
