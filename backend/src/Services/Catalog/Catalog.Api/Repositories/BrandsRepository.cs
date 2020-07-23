@@ -29,7 +29,7 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
             return await _context.Brands
                     .Include(c => c.ProductItems)
                     .Include(c => c.Category)
-                    .SingleAsync(c => c.Id == id);
+                    .SingleOrDefaultAsync(c => c.Id == id);
         }
        
         public async Task CreateBrand(Brand item)
