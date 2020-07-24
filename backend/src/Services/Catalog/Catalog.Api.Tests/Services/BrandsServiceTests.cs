@@ -91,7 +91,7 @@ namespace Catalog.Api.Tests.Services
         [InlineData("Test", null)]
         [InlineData(null, "1")]
         [InlineData(null, null)]
-        public async Task Create_Brand_With_Null_Params_Then_Throw_NullPropsEntityException(string name, string id)
+        public async Task Create_Brand_With_Wrong_Params_Then_Throw_NullPropsEntityException(string id, string name)
         {
             // Arrange
             _mockRepository.Setup(x => x.CreateBrand(It.IsAny<Brand>()));
