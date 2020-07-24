@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using WhiteBear.Services.Catalog.Api.Data.DTO.Brand;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
+using WhiteBear.Services.Catalog.Api.Infrastructure.Exceptions;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services.Abstract;
 
@@ -23,18 +24,38 @@ namespace WhiteBear.Services.Catalog.Api.Services
 
         public async Task<Brand> GetBrandById(string id)
         {
-            return await _brandsRepository.GetBrandItem(id);
+            var brand = await _brandsRepository.GetBrandItem(id);
+            if (brand == null)
+            {
+                throw new NotFoundEntityException($"Brand with id: {id} not found.");
+            }
+            return brand;
         }
 
         public async Task CreateBrand(NewBrandDTO newBrandDTO)
         {
-            var Brand = _mapper.Map<Brand>(newBrandDTO);
-            await _brandsRepository.CreateBrand(Brand);
+            var brand = _mapper.Map<Brand>(newBrandDTO);
+            if (brand.Name == null)
+            {
+                throw new NullPropsEntityException("Property 'Name' can't be a null.");
+            }
+
+            if (brand.CategoryId == null)
+            {
+                throw new NullPropsEntityException("Brand must have categoryId.");
+            }
+            await _brandsRepository.CreateBrand(brand);
         }
 
         public async Task UpdateBrand(BrandDTO BrandDTO)
         {
             var brand = _mapper.Map<Brand>(BrandDTO);
+
+            if (brand.Id == null || brand.Name == null)
+            {
+                throw new NullPropsEntityException("Properties 'Id' and 'Name' can't be a null.");
+            }
+
             var oldBrand = await _brandsRepository.GetBrandItem(brand.Id);
 
             oldBrand.Name = brand.Name;
@@ -45,7 +66,17 @@ namespace WhiteBear.Services.Catalog.Api.Services
 
         public async Task DeleteBrand(string id)
         {
+            if (id == null)
+            {
+                throw new NullPropsEntityException("Property 'id' can't be a null.");
+            }
+
             var oldBrand = await _brandsRepository.GetBrandItem(id);
+
+            if (oldBrand == null)
+            {
+                throw new NotFoundEntityException($"Category with id: {id} not found.");
+            }
             await _brandsRepository.DeleteBrand(oldBrand);
         }
     }

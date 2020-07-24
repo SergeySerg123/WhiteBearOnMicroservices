@@ -5,9 +5,9 @@ using static WhiteBear.Services.Catalog.Api.Extensions.Utils;
 
 namespace WhiteBear.Services.Catalog.Api.Data.MappingProfiles
 {
-    public sealed class ProductItemProfile : Profile
+    public sealed class ProductProfile : Profile
     {
-        public ProductItemProfile()
+        public ProductProfile()
         {
             CreateMap<ProductItemDTO, ProductItem>()
                 .ForMember(dest => dest.PreviewImg, s => s.MapFrom(sr => string.IsNullOrEmpty(sr.PreviewImg) ? null : new Image { URL = sr.PreviewImg }));
