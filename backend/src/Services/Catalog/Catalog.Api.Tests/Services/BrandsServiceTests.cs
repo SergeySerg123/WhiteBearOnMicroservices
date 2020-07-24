@@ -81,18 +81,21 @@ namespace Catalog.Api.Tests.Services
         {
             // Arrange
             _mockRepository.Setup(x => x.CreateBrand(It.IsAny<Brand>()));
-            var newBrandDTO = new NewBrandDTO() { Name = "Test" };
+            var newBrandDTO = new NewBrandDTO() { Name = "Test", CategoryId = "1" };
 
             // Act
             await _brandsService.CreateBrand(newBrandDTO);
         }
 
-        [Fact]
-        public async Task Create_Brand_With_Null_Name_Then_Throw_NullPropsEntityException()
+        [Theory]
+        [InlineData("Test", null)]
+        [InlineData(null, "1")]
+        [InlineData(null, null)]
+        public async Task Create_Brand_With_Null_Params_Then_Throw_NullPropsEntityException(string name, string id)
         {
             // Arrange
             _mockRepository.Setup(x => x.CreateBrand(It.IsAny<Brand>()));
-            var newBrandDTO = new NewBrandDTO() { };
+            var newBrandDTO = new NewBrandDTO() { Name = name, CategoryId = id };
 
             // Act
             await Assert.ThrowsAsync<NullPropsEntityException>(() =>
@@ -114,7 +117,6 @@ namespace Catalog.Api.Tests.Services
 
         [Theory]
         [InlineData("1", null)]
-        [InlineData("2", null)]
         [InlineData(null, "Test")]
         [InlineData(null, null)]
         public async Task Update_Brand_With_Wrong_Data_Then_Throw_NullPropsEntityException(string id, string name)
