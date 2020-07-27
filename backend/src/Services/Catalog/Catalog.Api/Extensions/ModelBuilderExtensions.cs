@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections;
+using System.Collections.Generic;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
 
 namespace WhiteBear.Services.Catalog.Api.Extensions
@@ -51,5 +53,17 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
                 .WithOne()
                 .OnDelete(DeleteBehavior.Restrict);
         }
+
+        //public static void Seed(this ModelBuilder modelBuilder)
+        //{
+        //    var categories = GenerateRandomCategories();
+        //    var brands = GenerateRandomBrands();
+        //    var products = GenerateRandomProducts();
+        //}
+
+        //private static ICollection<Category> GenerateRandomCategories()
+        //{
+
+        //}
     }
 }
