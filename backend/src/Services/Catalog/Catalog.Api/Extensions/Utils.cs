@@ -15,6 +15,8 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
                     return EnumBeerTypes.Dark;
                 case 2:
                     return EnumBeerTypes.Unfiltered;
+                case 3:
+                    return EnumBeerTypes.All;
                 default:
                     throw new CastEnumBeerTypeException();
             }
