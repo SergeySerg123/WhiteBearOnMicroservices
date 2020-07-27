@@ -1,0 +1,83 @@
+@import "../../../variables.scss";
+
+.product-item-card {
+    margin: 10px;
+    height: 500px;
+  
+    img {
+      padding: 10px;
+      height: 320px;
+    }
+  }
+  
+  .grey-background {
+    background-color: #f4f6f8;
+  }
+  
+  .price-color {
+    float: right;
+    color: $blue;
+  }
+  
+  .raiting {
+    color: $blueLight;
+  }
+  
+  .raiting-negative {
+    color: #cccccc;
+  }
+  
+  .color-btn {
+    background-color: $blue;
+  }
+  
+  .color-btn:hover {
+    background-color: $darkBlue;
+  }
+  
+
+  .bottle-container {
+    border: 1px solid gray;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottle-container:hover {
+    cursor: pointer;
+    color: $blue;
+    border: 1px solid $blue;
+}
+.counter-body {
+    background-color: #fff;
+    border: 1px gray solid;
+    border-radius: 5px;
+    padding: 0 10px;
+    min-width: 80px;
+    max-width: 100px;
+    height: 40px;
+    color: gray;
+    padding-top: 5px;
+    transition: all 0.2s ease-in-out;
+
+    svg {
+        cursor: pointer;
+        transition: 0.2s all ease-in;
+    }
+
+    svg:hover {
+        color: $blue;
+        transform: scale(1.2);
+    }
+
+    .counter-num {
+        transition: all 0.2s ease-in-out;
+        color: $darkBlue;
+    }
+
+}
+
+.counter-body:hover {
+    border: 1px $darkBlue solid;
+}

@@ -1,0 +1,37 @@
+<header class="header-main-style text-white">
+    <app-backdrop 
+        [isOpenedMenu]="isOpenedMenu"
+        [isOpenedCard]="isOpenedCard"
+        ></app-backdrop> 
+    <app-left-menu
+        [isOpenedMenu]="isOpenedMenu"
+      
+        ></app-left-menu>
+    <app-card 
+        [isOpenedCard]="isOpenedCard"  
+        
+        ></app-card>
+    <div class="container">
+        <div class="row pt-3">
+            <div class="col-sm-4 d-flex align-items-center">
+                <fa-icon size="2x" [icon]="faBars" class="navbar-btn" (click)="toggleNavbar()"></fa-icon>
+                <div class="d-inline-block ml-3">MENU</div>
+            </div>
+            <div class="col-sm-4 d-flex align-items-center text-center">
+                <div>White Bear - твій улюблений смак пива!</div>
+            </div>
+            <div class="col-sm-4 text-right position-relative">
+                <fa-icon [icon]="faSearch" size="2x" class="mr-3"></fa-icon>
+                <fa-icon [icon]="faShoppingCart" class="cursor-pointer" (click)="toggleCard()"  size="2x"></fa-icon>
+                <div 
+                    [ngClass]="{'card-counter-show': hasItemsInCard}" 
+                    [ngClass]="{'card-counter-hide': !hasItemsInCard }" 
+                    class="card-counter d-inline-block">
+                    <div class="d-flex justify-content-center aligth-items-center">
+                      <div>{{itemsInCard}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </header>
