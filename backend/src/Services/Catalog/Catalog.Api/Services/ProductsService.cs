@@ -6,6 +6,7 @@ using static WhiteBear.Services.Catalog.Api.Extensions.Utils;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services.Abstract;
 using WhiteBear.Services.Catalog.Api.Enums;
+using WhiteBear.Services.Catalog.Api.Infrastructure.Exceptions;
 
 namespace WhiteBear.Services.Catalog.Api.Services
 {
@@ -23,12 +24,30 @@ namespace WhiteBear.Services.Catalog.Api.Services
         {
             EnumBeerTypes beerType = GetEnumBeerTypeFromIntType(type);
             var products = await _productsRepository.GetProducts(categoryId, brandId, beerType, pageSize, pageIndex);
+            if (products == null)
+            {
+                throw new NotFoundEntityException("No products");
+            }
             return _mapper.Map<ProductItemDTO[]>(products);
+        }
+
+        public async Task<ProductItemDTO> GetProduct(string id)
+        {
+            var product = await _productsRepository.GetProductItem(id);
+            if (product == null)
+            {
+                throw new NotFoundEntityException($"product with id '{id}' was not found.");
+            }
+            return _mapper.Map<ProductItemDTO>(product);
         }
 
         public async Task CreateProduct(NewProductItemDTO newProductItemDTO)
         {
-            var productItem = _mapper.Map<ProductItem>(newProductItemDTO);        
+            var productItem = _mapper.Map<ProductItem>(newProductItemDTO);
+            if (productItem.Name == null || productItem.CategoryId == null || productItem.BrandId == null)
+            {
+                throw new NullPropsEntityException("Properties 'Name, CategoryId, BrandId' can't be a null.");
+            }
             await _productsRepository.CreateProduct(productItem);
         }
 
@@ -36,6 +55,11 @@ namespace WhiteBear.Services.Catalog.Api.Services
         {
             var productItem = _mapper.Map<ProductItem>(productItemDTO);
             var oldProductItem = await _productsRepository.GetProductItem(productItem.Id);
+
+            if (productItem.Id == null || productItem.Name == null || productItem.CategoryId == null || productItem.BrandId == null)
+            {
+                throw new NullPropsEntityException("Properties 'Id, Name, CategoryId, BrandId' can't be a null.");
+            }
 
             oldProductItem.Name = productItem.Name;
             oldProductItem.Description = productItem.Description;
