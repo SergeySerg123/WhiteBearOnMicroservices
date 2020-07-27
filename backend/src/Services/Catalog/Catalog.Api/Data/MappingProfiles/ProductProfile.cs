@@ -10,6 +10,8 @@ namespace WhiteBear.Services.Catalog.Api.Data.MappingProfiles
         public ProductProfile()
         {
             CreateMap<ProductItemDTO, ProductItem>()
+                .ForMember(dest => dest.CategoryId, s => s.MapFrom(sr => sr.Category.Id))
+                .ForMember(dest => dest.BrandId, s => s.MapFrom(sr => sr.Brand.Id))
                 .ForMember(dest => dest.PreviewImg, s => s.MapFrom(sr => string.IsNullOrEmpty(sr.PreviewImg) ? null : new Image { URL = sr.PreviewImg }));
 
             CreateMap<ProductItem, ProductItemDTO>()
