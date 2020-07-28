@@ -35,6 +35,8 @@ namespace WhiteBear.Services.Catalog.Api
                 });
             });
 
+            services.AddCors();
+
             services.AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)));
         }
 
@@ -51,6 +53,12 @@ namespace WhiteBear.Services.Catalog.Api
                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductCatalogAPI v1");
                    });
             }
+            app.UseCors(builder => builder
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithExposedHeaders("Token-Expired")
+                .AllowCredentials()
+                .WithOrigins("http://localhost:4200"));
 
             app.UseMvc();
             SeedData.EnsurePopulated(app).Wait();
