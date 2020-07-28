@@ -46,16 +46,16 @@ namespace Catalog.Api.Tests.Services
                 It.IsAny<int>(),
                 It.IsAny<int>()
                 ))
-                .ReturnsAsync(new ProductItem[] {
-                    new ProductItem() { Id="1", Name = "Test", CategoryId="1", BrandId="1" },
-                    new ProductItem() { Id="2", Name = "Test-2", CategoryId="1", BrandId="1" }
+                .ReturnsAsync(new Product[] {
+                    new Product() { Id="1", Name = "Test", CategoryId="1", BrandId="1" },
+                    new Product() { Id="2", Name = "Test-2", CategoryId="1", BrandId="1" }
                 });
 
             // Act 
             var productItemDTO = await _productsService.GetProducts(categoryId, brandId, type, pageSize, pageIndex);
 
             // Assert
-            Assert.IsType<ProductItemDTO[]>(productItemDTO);
+            Assert.IsType<ProductDTO[]>(productItemDTO);
             Assert.NotNull(productItemDTO);
         }
 
@@ -83,13 +83,13 @@ namespace Catalog.Api.Tests.Services
         {
             // Arrange
             _mockRepository.Setup(x => x.GetProductItem(It.IsAny<string>()))
-                .ReturnsAsync(new ProductItem() { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
+                .ReturnsAsync(new Product() { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
 
             // Act 
             var productDTO = await _productsService.GetProduct("1");
 
             // Assert
-            Assert.IsType<ProductItemDTO>(productDTO);
+            Assert.IsType<ProductDTO>(productDTO);
             Assert.NotNull(productDTO);
         }
 
@@ -98,7 +98,7 @@ namespace Catalog.Api.Tests.Services
         {
             // Arrange
             _mockRepository.Setup(x => x.GetProductItem(It.Is<string>(s => s.Equals("1"))))
-                .ReturnsAsync(new ProductItem() { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
+                .ReturnsAsync(new Product() { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
 
             // Act and Assert 
             await Assert.ThrowsAsync<NotFoundEntityException>(() =>
@@ -109,8 +109,8 @@ namespace Catalog.Api.Tests.Services
         public async Task Create_Product_Then_No_Exception()
         {
             // Arrange
-            _mockRepository.Setup(x => x.CreateProduct(It.IsAny<ProductItem>()));
-            var newProductDTO = new NewProductItemDTO() { Name = "Test", CategoryId = "1", BrandId = "1" };
+            _mockRepository.Setup(x => x.CreateProduct(It.IsAny<Product>()));
+            var newProductDTO = new NewProductDTO() { Name = "Test", CategoryId = "1", BrandId = "1" };
 
             // Act
             await _productsService.CreateProduct(newProductDTO);
@@ -123,8 +123,8 @@ namespace Catalog.Api.Tests.Services
         public async Task Create_Product_With_Wrong_Params_Then_Throw_NullPropsEntityException(string categoryId, string brandId, string name)
         {
             // Arrange
-            _mockRepository.Setup(x => x.CreateProduct(It.IsAny<ProductItem>()));
-            var newProductDTO = new NewProductItemDTO() { Name = name, CategoryId = categoryId, BrandId = brandId };
+            _mockRepository.Setup(x => x.CreateProduct(It.IsAny<Product>()));
+            var newProductDTO = new NewProductDTO() { Name = name, CategoryId = categoryId, BrandId = brandId };
 
             // Act
             await Assert.ThrowsAsync<NullPropsEntityException>(() =>
@@ -135,10 +135,10 @@ namespace Catalog.Api.Tests.Services
         public async Task Update_Product_Then_No_Exception()
         {
             // Arrange
-            _mockRepository.Setup(x => x.UpdateProduct(It.IsAny<ProductItem>()));
+            _mockRepository.Setup(x => x.UpdateProduct(It.IsAny<Product>()));
             _mockRepository.Setup(x => x.GetProductItem(It.Is<string>(s => s.Equals("1"))))
-                .ReturnsAsync(new ProductItem() { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
-            var newProductDTO = new ProductItemDTO() { Name = "Test", Id = "1" };
+                .ReturnsAsync(new Product() { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
+            var newProductDTO = new ProductDTO() { Name = "Test", Id = "1" };
 
             // Act
             await Assert.ThrowsAsync<NullPropsEntityException>(() =>
@@ -151,7 +151,7 @@ namespace Catalog.Api.Tests.Services
         public async Task Update_Product_With_Wrong_Data_Then_Throw_NullPropsEntityException(string id, string name)
         {
             await Assert.ThrowsAsync<NullPropsEntityException>(() =>
-                _productsService.UpdateProduct(new ProductItemDTO()
+                _productsService.UpdateProduct(new ProductDTO()
                 {
                     Id = id,
                     Name = name
