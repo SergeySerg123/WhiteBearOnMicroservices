@@ -1,26 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections;
+﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using WhiteBear.Services.Catalog.Api.Data.Entities;
 
 namespace WhiteBear.Services.Catalog.Api.Extensions
 {
     public static class ModelBuilderExtensions
     {
-        public static void Configure(this ModelBuilder modelBuilder)
+        private const int ENTITY_COUNT = 20;
+
+        public static void ConfigureRelationships(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductItem>()
+            modelBuilder.Entity<Product>()
                 .HasMany(p => p.Reactions)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);               
 
-            modelBuilder.Entity<ProductItem>()
+            modelBuilder.Entity<Product>()
                 .HasOne(p => p.Brand)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(b => b.BrandId);
 
-            modelBuilder.Entity<ProductItem>()
+            modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
@@ -54,16 +57,57 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
-        //public static void Seed(this ModelBuilder modelBuilder)
-        //{
-        //    var categories = GenerateRandomCategories();
-        //    var brands = GenerateRandomBrands();
-        //    var products = GenerateRandomProducts();
-        //}
+        public static void Seed(this ModelBuilder modelBuilder)
+        {
+            var categories = GenerateRandomCategories();
+            var brands = GenerateRandomBrands(categories);
+            var products = GenerateRandomProducts(categories, brands);
 
-        //private static ICollection<Category> GenerateRandomCategories()
-        //{
+            modelBuilder.Entity<Category>().HasData(categories);
+            modelBuilder.Entity<Brand>().HasData(brands);
+            modelBuilder.Entity<Product>().HasData(products);
+        }
 
-        //}
+        private static ICollection<Category> GenerateRandomCategories()
+        {
+            var categoriesFake = new Faker<Category>()
+                .RuleFor(c => c.Id, f => f.UniqueIndex.ToString())
+                .RuleFor(c => c.Name, f => f.Lorem.Text());
+
+            var categories = categoriesFake.Generate(ENTITY_COUNT);
+
+            return categories;
+        }
+
+        private static ICollection<Brand> GenerateRandomBrands(ICollection<Category> categories)
+        {
+            var brandsFake = new Faker<Brand>()
+                .RuleFor(b => b.Id, f => f.UniqueIndex.ToString())
+                .RuleFor(b => b.Name, f => f.Lorem.Text())
+                .RuleFor(c => c.CategoryId, f => f.PickRandom(categories).Id);
+
+            var brands = brandsFake.Generate(ENTITY_COUNT);
+
+            return brands;
+        }
+
+        private static ICollection<Product> GenerateRandomProducts(ICollection<Category> categories, ICollection<Brand> brands)
+        {
+            var productsFake = new Faker<Product>()
+                .RuleFor(b => b.Id, f => f.UniqueIndex.ToString())
+                .RuleFor(b => b.Name, f => f.Lorem.Text())
+                .RuleFor(b => b.BrandId, f => f.PickRandom(brands).Id);
+
+            var products = productsFake.Generate(ENTITY_COUNT);
+
+            foreach (var p in products)
+            {
+                var brand = brands.FirstOrDefault(b => b.Id == p.BrandId);
+
+                p.CategoryId = brand.CategoryId;
+            }
+
+            return products;
+        }
     }
 }
