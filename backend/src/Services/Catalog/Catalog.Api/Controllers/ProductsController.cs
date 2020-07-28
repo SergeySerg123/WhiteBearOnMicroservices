@@ -18,8 +18,8 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
 
         //GET: /api/products/items/categories/{categoryId}/brands/{brandId}/types/{type}?pageSize=50&pageIndex=1
         [HttpGet]
-        [Route("items/category/{category}/brand/{brand}/type/{type}")]
-        public async Task<IActionResult> GetProducts(string categoryId = null, string brandId = null, int type = 3,
+        [Route("items")]
+        public async Task<IActionResult> GetProducts([FromQuery]string categoryId = null, [FromQuery]string brandId = null, [FromQuery]int type = 3,
             [FromQuery] int pageSize = 50, [FromQuery]int pageIndex = 0)
         {
             var products = await _productsService.GetProducts(categoryId, brandId, type, pageSize, pageIndex);
