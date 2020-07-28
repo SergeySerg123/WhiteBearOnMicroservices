@@ -9,16 +9,16 @@ namespace WhiteBear.Services.Catalog.Api.Data.MappingProfiles
     {
         public ProductProfile()
         {
-            CreateMap<ProductItemDTO, ProductItem>()
+            CreateMap<ProductDTO, Product>()
                 .ForMember(dest => dest.CategoryId, s => s.MapFrom(sr => sr.Category.Id))
                 .ForMember(dest => dest.BrandId, s => s.MapFrom(sr => sr.Brand.Id))
                 .ForMember(dest => dest.PreviewImg, s => s.MapFrom(sr => string.IsNullOrEmpty(sr.PreviewImg) ? null : new Image { URL = sr.PreviewImg }));
 
-            CreateMap<ProductItem, ProductItemDTO>()
+            CreateMap<Product, ProductDTO>()
                 .ForMember(dest => dest.PreviewImg, src => src.MapFrom(x => x.PreviewImg != null ? x.PreviewImg.URL : string.Empty));
                  
             
-            CreateMap<NewProductItemDTO, ProductItem>()
+            CreateMap<NewProductDTO, Product>()
                 .ForMember(dest => dest.PreviewImg, s => s.MapFrom(sr => string.IsNullOrEmpty(sr.PreviewImg) ? null : new Image { URL = sr.PreviewImg }))
                 .ForMember(dest => dest.BeerType, src => src.MapFrom(x => GetEnumBeerTypeFromIntType(x.BeerType))); 
         }
