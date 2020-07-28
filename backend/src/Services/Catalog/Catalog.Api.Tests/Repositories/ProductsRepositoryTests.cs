@@ -31,7 +31,7 @@ namespace Catalog.Api.Tests.Repositories
         public async Task Get_Product_Item_Then_Return_Exist_Product()
         {
             // Arrange
-            await _productsRepository.CreateProduct(new ProductItem { Id = "1", Name = "Test", CategoryId = "1", BrandId="1" });
+            await _productsRepository.CreateProduct(new Product { Id = "1", Name = "Test", CategoryId = "1", BrandId="1" });
 
             // Act
             var product = await _productsRepository.GetProductItem("1");
@@ -48,7 +48,7 @@ namespace Catalog.Api.Tests.Repositories
         public async Task Get_Not_Exist_Product_Item_Then_Return_Null()
         {
             // Arrange
-            await _productsRepository.CreateProduct(new ProductItem { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
+            await _productsRepository.CreateProduct(new Product { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
 
             // Act
             var product = await _productsRepository.GetProductItem("2");
@@ -62,7 +62,7 @@ namespace Catalog.Api.Tests.Repositories
         {
 
             // Arrange
-            await _productsRepository.CreateProduct(new ProductItem { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
+            await _productsRepository.CreateProduct(new Product { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
 
             // Act
             //var products = await _productsRepository.GetProducts();
@@ -77,7 +77,7 @@ namespace Catalog.Api.Tests.Repositories
         {
 
             // Act - 1
-            await _productsRepository.CreateProduct(new ProductItem { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
+            await _productsRepository.CreateProduct(new Product { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
             var p = await _productsRepository.GetProductItem("1");
 
             // Assert - 1
@@ -97,7 +97,7 @@ namespace Catalog.Api.Tests.Repositories
         public async Task Delete_Product_Then_Return_Null()
         {
             // Act - 1
-            await _productsRepository.CreateProduct(new ProductItem { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
+            await _productsRepository.CreateProduct(new Product { Id = "1", Name = "Test", CategoryId = "1", BrandId = "1" });
             var b = await _productsRepository.GetProductItem("1");
 
             // Assert - 1
