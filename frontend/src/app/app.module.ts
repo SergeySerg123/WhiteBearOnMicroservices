@@ -10,6 +10,7 @@ import { BackdropComponent } from './components/backdrop/backdrop.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { CatalogProductItemComponent } from './components/catalog-product-item/catalog-product-item.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CatalogProductItemComponent } from './components/catalog-product-item/c
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
