@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Extensions;
 using WhiteBear.Services.Catalog.Api.Filters;
 
@@ -52,6 +53,7 @@ namespace WhiteBear.Services.Catalog.Api
             }
 
             app.UseMvc();
+            SeedData.EnsurePopulated(app).Wait();
         }
     }
 }
