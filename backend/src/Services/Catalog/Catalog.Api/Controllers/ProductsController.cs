@@ -29,7 +29,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //POST: /api/products/items
         [HttpPost]
         [Route("items")]
-        public async Task<IActionResult> CreateProduct([FromBody]NewProductItemDTO newProductItemDTO)
+        public async Task<IActionResult> CreateProduct([FromBody]NewProductDTO newProductItemDTO)
         {
             if (newProductItemDTO == null)
             {
@@ -42,7 +42,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         //PUT: /api/products/items/{id}
         [HttpPut]
         [Route("items/{id}")]
-        public async Task<IActionResult> UpdateProduct(ProductItemDTO productItemDTO)
+        public async Task<IActionResult> UpdateProduct(ProductDTO productItemDTO)
         {
             await _productsService.UpdateProduct(productItemDTO);
             return NoContent();
