@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/services/products.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Product } from 'src/app/models/product/product';
 
 @Component({
   selector: 'app-catalog',
@@ -7,9 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogComponent implements OnInit {
 
-  constructor() { }
+  public $unsubscribe = new Subject<any>();
+
+  public products: Product[] = null;
+
+  constructor(
+    private productsService: ProductsService
+  ) { }
 
   ngOnInit(): void {
+    this.loadProducts();
   }
 
+  public loadCategories() {
+
+  }
+
+  public loadProducts() {
+    this.productsService.getProducts()
+      .pipe(takeUntil(this.$unsubscribe)).subscribe((resp) => {
+        if(resp.ok) {
+          this.products = resp.body as Product[];
+        }
+        console.log(resp.body);
+      }, (err) => {});
+  }
 }
