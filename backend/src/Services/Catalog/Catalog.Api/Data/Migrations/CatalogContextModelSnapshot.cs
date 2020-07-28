@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using WhiteBear.Services.Catalog.Api.Data.Context;
-using WhiteBear.Services.Catalog.Api.Data.Entities;
+using WhiteBear.Services.Catalog.Api.Enums;
 
 namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 {
@@ -18,7 +18,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Brand", b =>
@@ -26,13 +26,15 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CategoryId");
+                    b.Property<string>("CategoryId")
+                        .IsRequired();
 
                     b.Property<string>("CategoryId1");
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<string>("ProductItemId");
 
@@ -84,18 +86,20 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
                     b.ToTable("Image");
                 });
 
-            modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.ProductItem", b =>
+            modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Product", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("BeerType");
 
-                    b.Property<string>("BrandId");
+                    b.Property<string>("BrandId")
+                        .IsRequired();
 
                     b.Property<string>("BrandId1");
 
-                    b.Property<string>("CategoryId");
+                    b.Property<string>("CategoryId")
+                        .IsRequired();
 
                     b.Property<string>("CategoryId1");
 
@@ -109,7 +113,8 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.Property<string>("ImageId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
@@ -139,9 +144,10 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("ProductItemId");
+                    b.Property<string>("ProductId");
 
-                    b.Property<string>("ProductItemId1");
+                    b.Property<string>("ProductItemId")
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdatedAt");
 
@@ -149,9 +155,9 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductItemId");
+                    b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductItemId1");
+                    b.HasIndex("ProductItemId");
 
                     b.ToTable("Reactions");
                 });
@@ -169,7 +175,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.ProductItem", b =>
+            modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Product", b =>
                 {
                     b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Brand", "Brand")
                         .WithMany()
@@ -198,14 +204,14 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
             modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Reaction", b =>
                 {
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.ProductItem", "ProductItem")
-                        .WithMany()
-                        .HasForeignKey("ProductItemId")
+                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Product")
+                        .WithMany("Reactions")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.ProductItem")
-                        .WithMany("Reactions")
-                        .HasForeignKey("ProductItemId1")
+                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Product", "ProductItem")
+                        .WithMany()
+                        .HasForeignKey("ProductItemId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
