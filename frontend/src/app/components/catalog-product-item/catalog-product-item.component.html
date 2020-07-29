@@ -1,16 +1,16 @@
 <div class="product-item-card card">
-    <img class="card-img-top" width="100%" class="grey-background" src="{{img}}" alt="Card image cap">
+    <img class="card-img-top" width="100%" class="grey-background" src="{{product.previewImg}}" alt="Card image cap">
     <div class="card-body">
-        <div class="card-title">Кроненбург</div>
+        <div class="card-title">{{product.name}}</div>
         <div class="card-text">
-            <div class="card-text">Описание пива</div>
+            <div class="card-text">{{product.description}}</div>
             <div class="raiting">
                 <fa-icon [icon]="faStar"></fa-icon>
                 <fa-icon [icon]="faStar"></fa-icon>
                 <fa-icon [icon]="faStar"></fa-icon>
                 <fa-icon [icon]="faStar" class="raiting-negative"></fa-icon>
                 <fa-icon [icon]="faStar" class="raiting-negative"></fa-icon>
-                <span class="price-color">50 грн. за кг</span>
+                <span class="price-color">{{product.price}} грн. за кг</span>
             </div>
         </div>
         <div class="d-flex justify-content-between mt-1">
