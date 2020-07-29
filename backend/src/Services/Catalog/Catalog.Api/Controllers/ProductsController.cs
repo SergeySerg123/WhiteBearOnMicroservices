@@ -16,7 +16,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
             _productsService = productsService;
         }
 
-        //GET: /api/products/items/categories/{categoryId}/brands/{brandId}/types/{type}?pageSize=50&pageIndex=1
+        //GET: /api/products/items?categoryId={categoryId}&brandId={brandId}&type={type}&pageSize=50&pageIndex=1
         [HttpGet]
         [Route("items")]
         public async Task<IActionResult> GetProducts([FromQuery]string categoryId = null, [FromQuery]string brandId = null, [FromQuery]int type = 3,
@@ -24,6 +24,14 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
         {
             var products = await _productsService.GetProducts(categoryId, brandId, type, pageSize, pageIndex);
             return Ok(products);
+        }
+
+        [HttpGet]
+        [Route("items/{id}")]
+        public async Task<IActionResult> GetProduct(string id)
+        {
+            var product = await _productsService.GetProduct(id);
+            return Ok(product);
         }
 
         //POST: /api/products/items
@@ -41,7 +49,7 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
 
         //PUT: /api/products/items/{id}
         [HttpPut]
-        [Route("items/{id}")]
+        [Route("items")]
         public async Task<IActionResult> UpdateProduct(ProductDTO productItemDTO)
         {
             await _productsService.UpdateProduct(productItemDTO);
