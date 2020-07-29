@@ -20,7 +20,13 @@ export class CatalogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadCategories();
     this.loadProducts();
+  }
+
+  ngOnDestroy(): void {
+    this.$unsubscribe.next();
+    this.$unsubscribe.complete();
   }
 
   public loadCategories() {
@@ -29,7 +35,8 @@ export class CatalogComponent implements OnInit {
 
   public loadProducts() {
     this.productsService.getProducts()
-      .pipe(takeUntil(this.$unsubscribe)).subscribe((resp) => {
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((resp) => {
         if(resp.ok) {
           this.products = resp.body as Product[];
         }
