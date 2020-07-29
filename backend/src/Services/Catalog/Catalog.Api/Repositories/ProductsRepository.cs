@@ -37,6 +37,7 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
             var items = await query.Include(p => p.Reactions)  
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
+                .Include(p => p.PreviewImg)
                 .Skip(pageIndex)
                 .Take(pageSize)
                 .AsNoTracking()
