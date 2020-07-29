@@ -1,28 +1,60 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpInternalService {
+  public headers = new HttpHeaders();
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  public getFullRequest(url: string) {
-    return this.http.get(url, {observe: "response", responseType: 'json'});
+  public getHeaders(): HttpHeaders {
+    return this.headers;
   }
 
-  public postFullRequest(url: string, data: any) {
-    return this.http.post(url, data, {observe: "response", responseType: 'json'});
+  public getHeader(key: string): string {
+    return this.headers[key];
   }
 
-  public putFullRequest(url: string, data: any) {
-    return this.http.put(url, data, {observe: "response", responseType: 'json'});
+  public setHeader(key: string, value: string): void {
+    this.headers[key] = value;
   }
 
-  public deleteFullRequest(url: string, data: any) {
-    return this.http.delete(url);
+  public deleteHeader(key: string): void {
+    delete this.headers[key];
+  }
+
+  public getFullRequest<T>(url: string, httpParams?: HttpParams): Observable<HttpResponse<T>> {
+    return this.http.get<T>(url, { 
+      observe: 'response', 
+      responseType: 'json', 
+      params: httpParams 
+    });
+  }
+
+  public postFullRequest<T>(url: string, data: any, httpParams?: HttpParams) : Observable<HttpResponse<T>> {
+    return this.http.post<T>(url, data, {
+      observe: 'response',
+      responseType: 'json',
+      params: httpParams
+    });
+  }
+
+  public putFullRequest<T>(url: string, data: any, httpParams?: HttpParams): Observable<HttpResponse<T>> {
+    return this.http.put<T>(url, data, {
+      observe: 'response',
+      responseType: 'json',
+      params: httpParams
+    });
+  }
+
+  public deleteFullRequest<T>(url: string, httpParams?: HttpParams): Observable<HttpResponse<T>> {
+    return this.http.delete<T>(url, {
+      params: httpParams, 
+      observe: 'response', 
+      responseType: 'json'
+    });
   }
 }
