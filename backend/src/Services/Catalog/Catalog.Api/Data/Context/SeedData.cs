@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,7 +37,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
         {
             var categoriesFake = new Faker<Category>()
                 .RuleFor(c => c.Id, f => f.UniqueIndex.ToString())
-                .RuleFor(c => c.Name, f => f.Lorem.Text());
+                .RuleFor(c => c.Name, f => f.Company.CompanyName());
 
             var categories = categoriesFake.Generate(ENTITY_COUNT);
 
@@ -49,7 +48,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
         {
             var brandsFake = new Faker<Brand>()
                 .RuleFor(b => b.Id, f => f.UniqueIndex.ToString())
-                .RuleFor(b => b.Name, f => f.Lorem.Text())
+                .RuleFor(b => b.Name, f => f.Company.CompanyName())
                 .RuleFor(c => c.CategoryId, f => f.PickRandom(categories).Id);
 
             var brands = brandsFake.Generate(ENTITY_COUNT);
@@ -61,7 +60,10 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
         {
             var productsFake = new Faker<Product>()
                 .RuleFor(b => b.Id, f => f.UniqueIndex.ToString())
-                .RuleFor(b => b.Name, f => f.Lorem.Text())
+                .RuleFor(b => b.Name, f => f.Company.CompanyName())
+                .RuleFor(b => b.Description, f => f.Lorem.Text())
+                .RuleFor(b => b.Price, f => f.Random.Decimal())
+                .RuleFor(b => b.PreviewImg, f => new Image { URL = "https://i.imgur.com/DCuEHzh.png"})
                 .RuleFor(b => b.BrandId, f => f.PickRandom(brands).Id);
 
             var products = productsFake.Generate(ENTITY_COUNT);
