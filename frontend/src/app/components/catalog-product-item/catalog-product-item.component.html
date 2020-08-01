@@ -1,9 +1,9 @@
 <div class="product-item-card card">
     <img class="card-img-top" width="100%" class="grey-background" src="{{product.previewImg}}" alt="Card image cap">
     <div class="card-body">
-        <div class="card-title">{{product.name}}</div>
+        <div class="card-title"><b>{{product.name.substr(0, 15)}}</b></div>
         <div class="card-text">
-            <div class="card-text">{{product.description}}</div>
+            <div class="card-text">{{description}}</div>
             <div class="raiting">
                 <fa-icon [icon]="faStar"></fa-icon>
                 <fa-icon [icon]="faStar"></fa-icon>

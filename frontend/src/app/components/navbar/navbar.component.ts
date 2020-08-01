@@ -29,6 +29,10 @@ export class NavbarComponent implements OnInit {
     return this.items;
   }
 
+  public onCloseMenu() {
+    this.toggleNavbar();
+  }
+
   public toggleNavbar() {
     this.isOpenedMenu = !this.isOpenedMenu;
   }

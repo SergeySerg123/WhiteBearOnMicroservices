@@ -44,7 +44,7 @@ namespace WhiteBear.Services.Catalog.Api.Services
         public async Task CreateProduct(NewProductDTO newProductItemDTO)
         {
             var productItem = _mapper.Map<Product>(newProductItemDTO);
-            if (productItem.Name == null || productItem.CategoryId == null || productItem.BrandId == null)
+            if (productItem.Name == null  || productItem.BrandId == null || productItem.CategoryId == null)
             {
                 throw new NullPropsEntityException("Properties 'Name, CategoryId, BrandId' can't be a null.");
             }
@@ -68,8 +68,8 @@ namespace WhiteBear.Services.Catalog.Api.Services
             oldProductItem.BeerType = productItem.BeerType;
             oldProductItem.Density = productItem.Density;
             oldProductItem.PreviewImg = productItem.PreviewImg;
-            oldProductItem.CategoryId = productItem.CategoryId;
             oldProductItem.BrandId = productItem.BrandId;
+            oldProductItem.CategoryId = productItem.CategoryId;
             oldProductItem.UpdatedAt = productItem.CreatedAt;
 
             await _productsRepository.UpdateProduct(oldProductItem);

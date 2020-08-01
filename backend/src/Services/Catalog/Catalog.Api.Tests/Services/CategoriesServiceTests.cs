@@ -44,7 +44,7 @@ namespace Catalog.Api.Tests.Services
             var categories = await _categoriesService.GetCategories();
 
             // Assert
-            Assert.IsType<Category[]>(categories);
+            Assert.IsType<CategoryDTO[]>(categories);
             Assert.NotNull(categories);
         }
 
@@ -59,7 +59,7 @@ namespace Catalog.Api.Tests.Services
             var category = await _categoriesService.GetCategoryById("1");
 
             // Assert
-            Assert.IsType<Category>(category);
+            Assert.IsType<CategoryDTO>(category);
             Assert.NotNull(category);
         }
 

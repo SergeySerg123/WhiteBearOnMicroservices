@@ -26,25 +26,17 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CategoryId")
-                        .IsRequired();
-
-                    b.Property<string>("CategoryId1");
+                    b.Property<string>("CategoryId");
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("ProductItemId");
+                    b.Property<string>("Name");
 
                     b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CategoryId1");
 
                     b.ToTable("Brands");
                 });
@@ -54,14 +46,9 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BrandId");
-
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("ProductItemId");
+                    b.Property<string>("Name");
 
                     b.Property<DateTime>("UpdatedAt");
 
@@ -93,15 +80,9 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.Property<int>("BeerType");
 
-                    b.Property<string>("BrandId")
-                        .IsRequired();
+                    b.Property<string>("BrandId");
 
-                    b.Property<string>("BrandId1");
-
-                    b.Property<string>("CategoryId")
-                        .IsRequired();
-
-                    b.Property<string>("CategoryId1");
+                    b.Property<string>("CategoryId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -113,12 +94,9 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.Property<string>("ImageId");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
-
-                    b.Property<string>("ReactionId");
 
                     b.Property<DateTime>("UpdatedAt");
 
@@ -126,11 +104,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.HasIndex("BrandId1");
-
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CategoryId1");
 
                     b.HasIndex("ImageId");
 
@@ -146,9 +120,6 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.Property<string>("ProductId");
 
-                    b.Property<string>("ProductItemId")
-                        .IsRequired();
-
                     b.Property<DateTime>("UpdatedAt");
 
                     b.Property<int>("Value");
@@ -157,44 +128,27 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ProductItemId");
-
                     b.ToTable("Reactions");
                 });
 
             modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Brand", b =>
                 {
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Category")
+                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Category", "Category")
                         .WithMany("Brands")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId1")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Product", b =>
                 {
                     b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Brand", "Brand")
-                        .WithMany()
+                        .WithMany("ProductItems")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Brand")
-                        .WithMany("ProductItems")
-                        .HasForeignKey("BrandId1")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Category")
-                        .WithMany("ProductItems")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId1")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Image", "PreviewImg")
@@ -204,14 +158,9 @@ namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 
             modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Reaction", b =>
                 {
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Product")
+                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Product", "Product")
                         .WithMany("Reactions")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("WhiteBear.Services.Catalog.Api.Data.Entities.Product", "ProductItem")
-                        .WithMany()
-                        .HasForeignKey("ProductItemId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618

@@ -23,7 +23,6 @@ namespace WhiteBear.Services.Catalog.Api
             services.RegisterCustomServices();
             services.RegisterAutoMapper();
             services.RegisterCustomDbConnection(Configuration);
-            services.SeedCustomData();
 
             services.AddSwaggerGen(options =>
             {

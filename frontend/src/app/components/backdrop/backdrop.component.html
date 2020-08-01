@@ -1,4 +1,4 @@
 <div class="backdrop" 
     [ngClass]="{'backdrop-show' : isOpenedMenu || isOpenedCard}"
-    [ngClass]="{'backdrop-hide' : !isOpenedMenu || !isOpenedCard}"
+    [ngClass]="{'backdrop-hide' : !isOpenedMenu && !isOpenedCard}"
     ></div>

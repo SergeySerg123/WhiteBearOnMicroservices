@@ -26,7 +26,7 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
         public async Task<Category> GetCategoryItem(string id)
         {
             return await _context.Categories
-                    .Include(c => c.ProductItems)
+                    .Include(c => c.Products)
                     .Include(c => c.Brands)
                     .SingleOrDefaultAsync(c => c.Id == id);
         }

@@ -37,14 +37,6 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
             Assembly.GetExecutingAssembly());
         }
 
-        public static void SeedCustomData(this IServiceCollection services)
-        {
-            var context = services.BuildServiceProvider()
-                       .GetService<CatalogContext>();
-            //TODO Seed data
-            //CatalogSeed.SeedAsync(context).Wait();
-        }
-
         public static void RegisterCustomDbConnection(this IServiceCollection services, IConfiguration configuration)
         {
             //When docker-compose are not exist

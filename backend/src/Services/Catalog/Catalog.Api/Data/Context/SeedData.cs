@@ -22,7 +22,8 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
                 {
                     var categories = GenerateRandomCategories();
                     var brands = GenerateRandomBrands(categories);
-                    var products = GenerateRandomProducts(categories, brands);
+                    var reactions = GenerateRandomReactions();
+                    var products = GenerateRandomProducts(reactions, brands);
 
                     await context.Categories.AddRangeAsync(categories);
                     await context.Brands.AddRangeAsync(brands);
@@ -30,7 +31,7 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
 
                     await context.SaveChangesAsync();
                 }
-            }      
+            }
         }
 
         private static ICollection<Category> GenerateRandomCategories()
@@ -56,14 +57,25 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
             return brands;
         }
 
-        private static ICollection<Product> GenerateRandomProducts(ICollection<Category> categories, ICollection<Brand> brands)
+        private static ICollection<Reaction> GenerateRandomReactions()
+        {
+            var reactionsFake = new Faker<Reaction>()
+                .RuleFor(b => b.Value, f => f.Random.Int(1, 5));
+
+            var reactions = reactionsFake.Generate(ENTITY_COUNT);
+
+            return reactions;
+        }
+
+        private static ICollection<Product> GenerateRandomProducts(ICollection<Reaction> reactions, ICollection<Brand> brands)
         {
             var productsFake = new Faker<Product>()
                 .RuleFor(b => b.Id, f => f.UniqueIndex.ToString())
                 .RuleFor(b => b.Name, f => f.Company.CompanyName())
                 .RuleFor(b => b.Description, f => f.Lorem.Text())
                 .RuleFor(b => b.Price, f => f.Random.Decimal())
-                .RuleFor(b => b.PreviewImg, f => new Image { URL = "https://i.imgur.com/DCuEHzh.png"})
+                .RuleFor(b => b.Reactions, f => new List<Reaction>(reactions))
+                .RuleFor(b => b.PreviewImg, f => new Image { URL = "https://i.imgur.com/DCuEHzh.png" })
                 .RuleFor(b => b.BrandId, f => f.PickRandom(brands).Id);
 
             var products = productsFake.Generate(ENTITY_COUNT);
