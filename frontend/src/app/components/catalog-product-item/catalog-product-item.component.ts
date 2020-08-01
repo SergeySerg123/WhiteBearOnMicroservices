@@ -31,6 +31,7 @@ export class CatalogProductItemComponent implements OnInit {
      : this.product.description.substr(0, 25) + '...';
   }
 
+  // Reactions raiting
   public get reactions() {
     let {reactions} = this.product;
 
