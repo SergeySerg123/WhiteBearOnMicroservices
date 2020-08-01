@@ -27,7 +27,11 @@ export class CardService {
   }
 
   public deleteFromCard(product: Product) {
-    this.card.items = this.card.items.filter((item) => 
+    var card = this.card$.value;
+
+    card.items = card.items.filter((item) => 
       item.product.id !== product.id);
+
+    this.card$.next(card);
   }
 }
