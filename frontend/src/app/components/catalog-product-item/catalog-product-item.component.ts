@@ -11,6 +11,8 @@ import { Product } from 'src/app/models/product/product';
 export class CatalogProductItemComponent implements OnInit {
   
   @Input() public product: Product = null;
+
+  public quantity: number = 1;
   
   public faStar = faStar;
   public faWineBottle = faWineBottle;
@@ -47,8 +49,8 @@ export class CatalogProductItemComponent implements OnInit {
     return new Array();
   }
 
-  public addToCard() {
-
+  public addToCard(): void {
+    this.cardService.addToCard(this.product, this.quantity);
   }
 
   public increment() {
