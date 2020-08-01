@@ -13,7 +13,14 @@ export class CardService {
 
   public addToCard(product: Product, quantity: number) {
     let newItem: CardItem = {product, quantity};
-    this.card.items.push(newItem);
+
+    let item = this.card.items.find((item) => item.product.id === product.id);
+    
+    if(!item === null && !item === undefined) {
+      item.quantity += quantity;
+    } else {
+      this.card.items.push(newItem);
+    }    
   }
 
   public deleteFromCard(product: Product) {
