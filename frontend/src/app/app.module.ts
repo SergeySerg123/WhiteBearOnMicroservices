@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { CatalogProductItemComponent } from './components/catalog-product-item/catalog-product-item.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     BackdropComponent,
     LeftMenuComponent,
-    CatalogProductItemComponent
+    CatalogProductItemComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
