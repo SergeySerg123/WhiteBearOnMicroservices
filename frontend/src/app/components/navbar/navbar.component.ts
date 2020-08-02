@@ -50,10 +50,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return this.items.length;
   }
 
-  public onCloseMenu() {
-    this.toggleNavbar();
-  }
-
   public toggleNavbar() {
     this.isOpenedMenu = !this.isOpenedMenu;
   }

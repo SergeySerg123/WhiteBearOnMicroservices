@@ -5,11 +5,11 @@
         ></app-backdrop> 
     <app-left-menu
         [isOpenedMenu]="isOpenedMenu"
-        (toggle)="onCloseMenu()"
+        (toggle)="toggleNavbar()"
         ></app-left-menu>
     <app-card 
-        [isOpenedCard]="isOpenedCard"  
-        
+        [isOpenedCard]="isOpenedCard"
+        (toggle)="toggleCard()"  
         ></app-card>
     <div class="container">
         <div class="row pt-3">
@@ -21,7 +21,7 @@
                 <div>White Bear - твій улюблений смак пива!</div>
             </div>
             <div class="col-sm-4 text-right position-relative">
-                <fa-icon [icon]="faSearch" size="2x" class="mr-3"></fa-icon>
+                <fa-icon [icon]="faSearch" size="2x" class="cursor-pointer mr-3"></fa-icon>
                 <fa-icon [icon]="faShoppingCart" class="cursor-pointer" (click)="toggleCard()"  size="2x"></fa-icon>
                 <div 
                     [ngClass]="{'card-counter-show': hasItemsInCard}" 
