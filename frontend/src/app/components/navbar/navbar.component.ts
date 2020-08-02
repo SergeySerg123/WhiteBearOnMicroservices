@@ -3,6 +3,7 @@ import { faBars, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-ic
 import { CardService } from 'src/app/services/card.service';
 import { CardItem } from 'src/app/models/card/card-item';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -17,28 +18,36 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isOpenedMenu: boolean = false;
   public isOpenedCard: boolean = false;
 
-  public items: CardItem[] = null;
+  public items: CardItem[] = new Array<CardItem>();
+
+  public unsubscribe$ = new Subject<any>();
 
   constructor(
     private cardService: CardService
   ) { }
 
   ngOnInit(): void {
-    this.cardService.card$.subscribe(card => {
-      this.items = card.items;
-    })
+    this.cardService.card$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(card => {
+        this.items = card.items;
+      });
   }
 
   ngOnDestroy(): void {
-    this.cardService.card$.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public get hasItemsInCard() {
+    if (this.items === undefined) {
+      return false;
+    }
     return this.items.length > 0;
   }
 
   public get itemsInCard() {
-    return this.items;
+    return this.items.length;
   }
 
   public onCloseMenu() {

@@ -11,7 +11,7 @@ import { Product } from 'src/app/models/product/product';
 })
 export class CatalogComponent implements OnInit {
 
-  public $unsubscribe = new Subject<any>();
+  public unsubscribe$ = new Subject<any>();
 
   public products: Product[] = null;
 
@@ -25,8 +25,8 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.$unsubscribe.next();
-    this.$unsubscribe.complete();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public loadCategories() {
@@ -35,7 +35,7 @@ export class CatalogComponent implements OnInit {
 
   public loadProducts() {
     this.productsService.getProducts()
-      .pipe(takeUntil(this.$unsubscribe))
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe((resp) => {
         if(resp.ok) {
           this.products = resp.body as Product[];

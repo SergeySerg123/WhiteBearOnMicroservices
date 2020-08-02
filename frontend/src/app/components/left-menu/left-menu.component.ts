@@ -10,7 +10,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 export class LeftMenuComponent implements OnInit {
   public faTimes = faTimes;
 
-  @Input() public isOpenedMenu: boolean = false;
+  @Input() public isOpenedMenu: boolean;
   @Output() public toggle = new EventEmitter<void>();
 
 
