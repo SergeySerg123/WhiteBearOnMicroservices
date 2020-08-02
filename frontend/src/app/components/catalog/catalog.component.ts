@@ -40,7 +40,6 @@ export class CatalogComponent implements OnInit {
         if(resp.ok) {
           this.products = resp.body as Product[];
         }
-        console.log(resp.body);
       }, (err) => {});
   }
 }
