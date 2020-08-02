@@ -9,6 +9,31 @@
             (click)="toggleCard()" 
             size="2x" ></fa-icon>
     </div> 
+
+    <div class="card-items-area mt-2">
+        <div class="card-item" *ngFor="let cardItem of items">
+            <div class="card-item-img">
+                <img src="{{cardItem.product.previewImg}}" />
+            </div>        
+            <div class="card-item-details">
+                <div class="card-item-name pl-3">
+                    <b>{{cardItem.product.name}}</b>
+                </div>
+                <div class="card-item-counter-container pl-3 d-inline-block">
+                    <app-counter></app-counter>
+                </div>
+                <div class="d-inline-block ml-2">
+                    <p>0.5 за кг. + тара 1 шт. 1л по 0.2 за шт. = 20 грн. </p>
+                </div>
+            </div>  
+            <div class="card-delete-item-container">
+                <fa-icon [icon]="faTimes"
+                    (click)="deleteFromCard(cardItem.product)"
+                    class="cursor-pointer card-delete-item-btn" ></fa-icon>
+            </div>      
+        </div>
+    </div>
+
     <div class="card-sum-area">
         
     </div>

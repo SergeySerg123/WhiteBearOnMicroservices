@@ -25,16 +25,45 @@
 }
 
 .card-items-area {
-    position: relative;
     height: 60%;
 
-    .card-delete-item-btn {
+    .card-item {
+        height: 90px;
+        width: 100%;
         position: relative;
-        top: 40px;
-        left: -20px;
-        
-        
+        margin-bottom: 10px;
+        .card-item-img {
+            position: absolute;
+            top: 0;
+            display: inline-block;
+            background-color: #C0C0C0;
+            width: 60px;
+            height: inherit;
+
+            img{
+                width: inherit;
+                height: inherit;
+            }
+        }
+
+        .card-item-details {
+            display: inline-block;
+            width: calc(100% - 70px);
+            height: inherit;
+            margin-left: 60px;
+        }
+
+        .card-delete-item-container {
+            display: inline-block;
+            width: 10px;
+        }
     }
+
+    .card-delete-item-btn {
+        color:red;
+    }
+
+    
 
 }
 
