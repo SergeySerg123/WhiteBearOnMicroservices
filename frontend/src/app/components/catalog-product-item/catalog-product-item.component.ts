@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faStar, faWineBottle, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CardService } from 'src/app/services/card.service';
 import { Product } from 'src/app/models/product/product';
@@ -11,6 +11,7 @@ import { Product } from 'src/app/models/product/product';
 export class CatalogProductItemComponent implements OnInit {
   
   @Input() public product: Product = null;
+  @Output() public bottleOptions: EventEmitter<Product> = new EventEmitter<Product>();
 
   public quantity: number = 1;
   
@@ -60,5 +61,9 @@ export class CatalogProductItemComponent implements OnInit {
 
   public dicrement() {
 
+  }
+
+  public openBottleOptions() {
+    this.bottleOptions.emit(this.product);
   }
 }
