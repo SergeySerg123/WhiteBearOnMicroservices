@@ -29,7 +29,7 @@ namespace WhiteBear.Services.Catalog.Api
                 options.DescribeAllEnumsAsStrings();
                 options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
                 {
-                    Title = "Product catalog API for ShopOnMicroservices",
+                    Title = "Catalog API for WhiteBearOnMicroservices",
                     Version = "v1"
                 });
             });
@@ -49,7 +49,7 @@ namespace WhiteBear.Services.Catalog.Api
                 app.UseSwagger()
                    .UseSwaggerUI(c =>
                    {
-                       c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductCatalogAPI v1");
+                       c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v1");
                    });
             }
             app.UseCors(builder => builder
