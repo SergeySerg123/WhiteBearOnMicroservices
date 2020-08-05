@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="bottle-container">
-                <fa-icon size="2x" [icon]="faWineBottle"></fa-icon>
+                <fa-icon (click)="openBottleOptions()" size="2x" [icon]="faWineBottle"></fa-icon>
             </div>
             <button (click)="addToCard()" class="btn btn-primary btn-sm color-btn">
                 У кошик
