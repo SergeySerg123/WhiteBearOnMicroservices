@@ -3,6 +3,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/models/product/product';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-catalog',
@@ -16,7 +17,8 @@ export class CatalogComponent implements OnInit {
   public products: Product[] = null;
 
   constructor(
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -41,5 +43,9 @@ export class CatalogComponent implements OnInit {
           this.products = resp.body as Product[];
         }
       }, (err) => {});
+  }
+
+  public openBottleOptions(product: Product) {
+    this.dialogService.openBottleDialog(product);
   }
 }
