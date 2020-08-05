@@ -4,12 +4,15 @@
             <img src="{{ product.previewImg }}" />
         </div>
         <div class="col-10">
-            <div class="text-right mt-2 ml-3">
+            <div class="color-blue text-right mt-2 ml-3">
                 <fa-icon [icon]="faTimes"
                     class="cursor-pointer"
                     (click)="closeDialog()"
                     size="2x" ></fa-icon>
             </div> 
+            <div class="beer-title">
+                {{product.name}}
+            </div>
         </div>
     </div>
 </div>

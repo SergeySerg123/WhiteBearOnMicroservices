@@ -1,5 +1,16 @@
+@import '../../../variables.scss';
+
 img {
     background-color: #f8f3f3;
     width: 100px;
     height: 130px;
+}
+
+.color-blue {
+    color: $darkBlue;
+}
+
+.beer-title {
+    font-size: 36pt;
+    font-weight: 700;
 }
