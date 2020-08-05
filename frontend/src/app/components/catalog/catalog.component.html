@@ -39,6 +39,7 @@
             <div *ngFor="let product of products" class="col-sm-3">
               <app-catalog-product-item
                 [product]="product"
+                (bottleOptions)="openBottleOptions($event)"
               ></app-catalog-product-item>
             </div>           
               <!-- INSERT LOOP OF PRODUCTS -->
