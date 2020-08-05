@@ -12,6 +12,9 @@ import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { CatalogProductItemComponent } from './components/catalog-product-item/catalog-product-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CounterComponent } from './components/counter/counter.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialComponentsModule } from './components/common/material-components/material-components.module';
+import { BottleDialogComponent } from './components/bottle-dialog/bottle-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,16 @@ import { CounterComponent } from './components/counter/counter.component';
     BackdropComponent,
     LeftMenuComponent,
     CatalogProductItemComponent,
-    CounterComponent
+    CounterComponent,
+    BottleDialogComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
