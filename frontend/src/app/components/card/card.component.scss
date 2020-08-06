@@ -32,8 +32,9 @@
         width: 100%;
         position: relative;
         margin-bottom: 10px;
+        
         .card-item-img {
-            
+            background-color: rgb(252, 252, 252);
             position: absolute;
             top: 0;
             display: inline-block;
@@ -51,26 +52,16 @@
             width: calc(100% - 10px);
             height: inherit;
 
-            .top-container {
-                width: 100%;
-                font-weight: normal;
-                font-size: 24pt;
-            }
+           
 
             .card-item-name {
                 font-size: 24pt;
                 font-weight: 400;
                 width: 70%;
+                line-height: 1.2em;
             }
 
-            .card-item-total-price {
-                width: 30%;
-
-                span {
-                    font-weight: normal;
-                    font-size: 16pt;
-                }
-            }
+            
 
             .card-item-counter-container {
                 margin-top: 20px;
@@ -99,12 +90,49 @@
         color:red;
     }
 
-    
+    .top-container {
+        width: 100%;
+        font-weight: normal;
+        font-size: 24pt;
+    }
+
+    .card-item-total-price {
+        width: 30%;
+
+        span {
+            font-weight: normal;
+            font-size: 16pt;
+        }
+    }
 
 }
 
 .card-sum-area {
     height: 40%;
+    padding-top: 20px;
+
+    .top-container {
+        width: 100%;
+        font-weight: normal;
+        font-size: 24pt;
+    }
+
+    .card-item-total-price {
+        width: 30%;
+
+        span {
+            font-weight: normal;
+            font-size: 16pt;
+        }
+    }
+
+    .total-item-name {
+        width: 70%;
+    }
+
+    .item-total-price {
+        width: 30%;
+    }
 }
 
 .is-opened-card {
