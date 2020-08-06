@@ -1,6 +1,7 @@
 @import '../../../variables.scss';
 
 img {
+    margin-top: 40px;
     background-color: #f8f3f3;
     width: 100px;
     height: 130px;
@@ -14,3 +15,22 @@ img {
     font-size: 36pt;
     font-weight: 700;
 }
+
+.price-and-counter {
+    margin-top: 35px;
+
+
+    .price {
+        font-size: 24pt;
+    }
+
+    .bottle-title {
+        margin-top: 30px;
+        font-size: 22pt;
+    }
+}
+
+hr {
+    margin-top: 60px;
+}
+
