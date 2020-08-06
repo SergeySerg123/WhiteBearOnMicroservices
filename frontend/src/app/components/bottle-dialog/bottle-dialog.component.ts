@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Product } from 'src/app/models/product/product';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from 'src/app/services/dialog.service';
+import { faTimes, faWineBottle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-bottle-dialog',
@@ -11,6 +10,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class BottleDialogComponent implements OnInit {
   public faTimes = faTimes;
+  public faWinesBottle = faWineBottle;
 
   public product: Product = null;
 
