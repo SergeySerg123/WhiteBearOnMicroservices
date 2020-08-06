@@ -32,7 +32,10 @@
                             </div>
                             
                             <div class="card-item-counter-container pl-3 d-inline-block">
-                                <app-counter></app-counter>
+                                <app-counter
+                                    [quantity]="quantity"
+                                    (quantityEvent)="setQuantity($event)"
+                                ></app-counter>
                             </div>
 
                             <div class="card-delete-item-container">
