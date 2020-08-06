@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,7 +10,8 @@ export class CounterComponent implements OnInit {
   public faMinus = faMinus;
   public faPlus = faPlus;
 
-  public quantity: number = 1;
+  @Input() public quantity: number;
+  @Output() public quantityEvent = new EventEmitter<number>();
 
   constructor() { }
 
@@ -18,10 +19,14 @@ export class CounterComponent implements OnInit {
   }
 
   public dicrement() {
-
+    if (this.quantity > 0.5) {
+      this.quantity -= 0.5;
+      this.quantityEvent.emit(this.quantity);
+    }
   }
 
   public increment() {
-
+    this.quantity += 0.5;
+    this.quantityEvent.emit(this.quantity);
   }
 }
