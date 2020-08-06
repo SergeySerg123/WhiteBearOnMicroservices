@@ -13,8 +13,8 @@
     padding: 20px 40px;
     transition: ease-in-out all 0.3s;
 
-    svg {
-        color: $blue;
+    .svg {
+        color: $darkBlue;
     }
 
     .card-logo {
@@ -28,16 +28,16 @@
     height: 60%;
 
     .card-item {
-        height: 90px;
+        height: 180px;
         width: 100%;
         position: relative;
         margin-bottom: 10px;
         .card-item-img {
+            
             position: absolute;
             top: 0;
             display: inline-block;
-            background-color: #C0C0C0;
-            width: 60px;
+            width: 120px;
             height: inherit;
 
             img{
@@ -48,9 +48,45 @@
 
         .card-item-details {
             display: inline-block;
-            width: calc(100% - 70px);
+            width: calc(100% - 10px);
             height: inherit;
-            margin-left: 60px;
+
+            .top-container {
+                width: 100%;
+                font-weight: normal;
+                font-size: 24pt;
+            }
+
+            .card-item-name {
+                font-size: 24pt;
+                font-weight: 400;
+                width: 70%;
+            }
+
+            .card-item-total-price {
+                width: 30%;
+
+                span {
+                    font-weight: normal;
+                    font-size: 16pt;
+                }
+            }
+
+            .card-item-counter-container {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                width: calc(100% - 10px);
+            }
+
+            .bottle-about-area {
+                width: 70%;
+                font-size: 14pt;
+                font-weight: normal;
+            }
+
+            .bottle-price {
+                font-size: 24pt;
+            }
         }
 
         .card-delete-item-container {
