@@ -14,13 +14,14 @@ import { Product } from 'src/app/models/product/product';
 export class CardComponent implements OnInit, OnDestroy {
   public faTimes = faTimes;
 
-
   @Input() public isOpenedCard: boolean = false;
-  @Output() public toggle: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public toggle = new EventEmitter<void>();
 
   public items: CardItem[] = new Array<CardItem>();
   
   public unsubscribe$ = new Subject<any>();
+
+  public quantity = 1;
 
   constructor(
     private cardService: CardService
@@ -31,7 +32,6 @@ export class CardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(card => {
         this.items = card.items;
-        console.log(this.items);
       });
   }
 
@@ -46,5 +46,13 @@ export class CardComponent implements OnInit, OnDestroy {
 
   public deleteFromCard(product: Product) {
     this.cardService.deleteFromCard(product);
+  }
+
+  public setQuantity(quantity: number) {
+    this.quantity = quantity;
+  }
+
+  public calcTotalPrice() {
+
   }
 }
