@@ -3,7 +3,7 @@
     [ngClass]="{'is-closed-card': !isOpenedCard}"
     >
 
-    <div class="mt-2 ml-3">
+    <div class="mt-2 ml-3 svg">
         <fa-icon [icon]="faTimes"
             class="cursor-pointer"
             (click)="toggleCard()" 
@@ -12,25 +12,48 @@
 
     <div class="card-items-area mt-2">
         <div class="card-item" *ngFor="let cardItem of items">
-            <div class="card-item-img">
-                <img src="{{cardItem.product.previewImg}}" />
-            </div>        
-            <div class="card-item-details">
-                <div class="card-item-name pl-3">
-                    <b>{{cardItem.product.name}}</b>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card-item-img">
+                            <img src="{{cardItem.product.previewImg}}" />
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="card-item-details">
+                            <div class="top-container">
+                                <div class="card-item-name d-inline-block">
+                                    {{cardItem.product.name}}
+                                </div>
+                                <div class="card-item-total-price d-inline-block text-right">
+                                    {{cardItem.product.price}}
+                                    <span> грн.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card-item-counter-container pl-3 d-inline-block">
+                                <app-counter></app-counter>
+                            </div>
+
+                            <div class="card-delete-item-container">
+                                <fa-icon [icon]="faTimes"
+                                    (click)="deleteFromCard(cardItem.product)"
+                                    class="cursor-pointer card-delete-item-btn" ></fa-icon>
+                            </div>
+
+                            <div class="bottle-about-area d-inline-block">
+                                <p>Бутылка, 2 литра 1 шт + Крышка "WB" 1 шт</p>
+                            </div>
+
+                            <div class="card-item-total-price bottle-price d-inline-block text-right">
+                                {{cardItem.product.price}}
+                                <span> грн.</span>
+                            </div>
+                        </div>  
+                         
+                    </div>
                 </div>
-                <div class="card-item-counter-container pl-3 d-inline-block">
-                    <app-counter></app-counter>
-                </div>
-                <div class="d-inline-block ml-2">
-                    <p>0.5 за кг. + тара 1 шт. 1л по 0.2 за шт. = 20 грн. </p>
-                </div>
-            </div>  
-            <div class="card-delete-item-container">
-                <fa-icon [icon]="faTimes"
-                    (click)="deleteFromCard(cardItem.product)"
-                    class="cursor-pointer card-delete-item-btn" ></fa-icon>
-            </div>      
+            </div> 
         </div>
     </div>
 
