@@ -25,7 +25,8 @@
 }
 
 .card-items-area {
-    height: 60%;
+    height: 70%;
+    overflow-y: auto;
 
     .card-item {
         height: 180px;
@@ -108,7 +109,7 @@
 }
 
 .card-sum-area {
-    height: 40%;
+    height: 30%;
     padding-top: 20px;
 
     .top-container {
