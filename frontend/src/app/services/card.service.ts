@@ -24,6 +24,7 @@ export class CardService {
     } else {
       card.items.push(newItem);
     }    
+    card.totalPrice = this.calcTotalPrice(card);
     this.card$.next(card);
   }
 
@@ -33,6 +34,18 @@ export class CardService {
     card.items = card.items.filter((item) => 
       item.product.id !== product.id);
 
+    card.totalPrice = this.calcTotalPrice(card);
+
     this.card$.next(card);
+  }
+
+  private calcTotalPrice(card: Card): number {
+    var totalPrice = 0;
+
+    card.items.forEach( (cardItem) => {
+      totalPrice += cardItem.product.price * cardItem.quantity;
+    } );
+
+    return +totalPrice.toFixed(2);
   }
 }

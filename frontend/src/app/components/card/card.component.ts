@@ -17,6 +17,7 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input() public isOpenedCard: boolean = false;
   @Output() public toggle = new EventEmitter<void>();
 
+  public totalPrice = 0;
   public items: CardItem[] = new Array<CardItem>();
   
   public unsubscribe$ = new Subject<any>();
@@ -31,6 +32,7 @@ export class CardComponent implements OnInit, OnDestroy {
     this.cardService.card$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(card => {
+        this.totalPrice = card.totalPrice;
         this.items = card.items;
       });
   }
@@ -50,9 +52,5 @@ export class CardComponent implements OnInit, OnDestroy {
 
   public setQuantity(quantity: number) {
     this.quantity = quantity;
-  }
-
-  public calcTotalPrice() {
-
   }
 }
