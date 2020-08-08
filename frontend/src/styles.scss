@@ -1,4 +1,4 @@
-
+@import './variables.scss';
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -36,3 +36,16 @@ $whitebear-theme: mat-light-theme($whitebear-primary, $whitebear-accent, $whiteb
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body::-webkit-scrollbar {
+    width: 4px;
+  }
+   
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  body::-webkit-scrollbar-thumb {
+    background-color: $darkBlue;
+    outline: 1px solid slategrey;
+  }
