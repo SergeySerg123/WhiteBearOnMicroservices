@@ -108,6 +108,19 @@
 
 }
 
+.card-items-area::-webkit-scrollbar {
+    width: 4px;
+  }
+   
+  .card-items-area::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  .card-items-area::-webkit-scrollbar-thumb {
+    background-color: $darkBlue;
+    outline: 1px solid slategrey;
+  }
+
 .card-sum-area {
     height: 30%;
     padding-top: 20px;
