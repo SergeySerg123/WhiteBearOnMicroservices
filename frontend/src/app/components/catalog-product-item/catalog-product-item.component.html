@@ -14,15 +14,11 @@
             </div>
         </div>
         <div class="d-flex justify-content-between mt-1">
-            <div class="counter-body d-flex alight-items-center justify-content-between">
-                <div>
-                    <fa-icon (click)="dicrement()" [icon]="faMinus"></fa-icon>
-                </div>
-                <div class="counter-num">{{quantity}}</div>
-                <div>
-                    <fa-icon (click)="increment()" [icon]="faPlus"></fa-icon>
-                </div>
-            </div>
+            <app-counter
+                [quantity]="quantity"
+                (quantityEvent)="setQuantity($event)"
+                ></app-counter>
+                
             <div class="bottle-container">
                 <fa-icon (click)="openBottleOptions()" size="2x" [icon]="faWineBottle"></fa-icon>
             </div>
