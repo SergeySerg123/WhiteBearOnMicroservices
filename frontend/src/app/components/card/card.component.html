@@ -45,11 +45,11 @@
                             </div>
 
                             <div class="bottle-about-area d-inline-block">
-                                <p>Бутылка, 2 литра 1 шт </p>
+                                <p>{{ parseBottlesAsInformStr(cardItem) }} </p>
                             </div>
 
                             <div class="card-item-total-price bottle-price d-inline-block text-right">
-                                {{cardItem.product.price}}
+                                {{ cardItem.totalBottlesPrice }}
                                 <span> грн.</span>
                             </div>
                         </div>  
