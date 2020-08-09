@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faStar, faWineBottle, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CardService } from 'src/app/services/card.service';
 import { Product } from 'src/app/models/product/product';
+import { BottleService } from 'src/app/services/bottle.service';
+import { Bottle } from 'src/app/models/bottle/bottle';
 
 @Component({
   selector: 'app-catalog-product-item',
@@ -21,7 +23,8 @@ export class CatalogProductItemComponent implements OnInit {
   public faPlus = faPlus;
 
   constructor(
-    private cardService: CardService
+    private cardService: CardService,
+    private bottleService: BottleService
   ) { }
 
   ngOnInit(): void {
@@ -52,15 +55,12 @@ export class CatalogProductItemComponent implements OnInit {
   }
 
   public addToCard(): void {
-    this.cardService.addToCard(this.product, this.quantity);
+    let bottles: Bottle[] = this.bottleService.calcBottles(this.quantity);
+    this.cardService.addToCard(this.product, this.quantity, bottles);
   }
 
-  public increment() {
-
-  }
-
-  public dicrement() {
-
+  public setQuantity(quantity: number) {
+    this.quantity = quantity;
   }
 
   public openBottleOptions() {
