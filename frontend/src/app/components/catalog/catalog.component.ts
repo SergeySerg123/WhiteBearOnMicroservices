@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/models/product/product';
 import { DialogService } from 'src/app/services/dialog.service';
+import { BottleService } from 'src/app/services/bottle.service';
 
 @Component({
   selector: 'app-catalog',
@@ -18,12 +19,14 @@ export class CatalogComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private bottleService: BottleService
   ) { }
 
   ngOnInit(): void {
     this.loadCategories();
     this.loadProducts();
+    this.bottleService.loadBottles();
   }
 
   ngOnDestroy(): void {
