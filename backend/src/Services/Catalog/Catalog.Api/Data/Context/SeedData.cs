@@ -31,6 +31,19 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
 
                     await context.SaveChangesAsync();
                 }
+
+                if (!context.Bottles.Any())
+                {
+                    await context.AddRangeAsync(new Bottle[]
+                    {
+                        new Bottle() {Capacity = 0.5, Price=0.5},
+                        new Bottle() {Capacity = 1, Price=0.7},
+                        new Bottle() {Capacity = 1.5, Price=0.9},
+                        new Bottle() {Capacity = 2, Price=1.1},
+                    });
+
+                    await context.SaveChangesAsync();
+                }
             }
         }
 
