@@ -12,32 +12,15 @@ using WhiteBear.Services.Catalog.Api.Enums;
 namespace WhiteBear.Services.Catalog.Api.Data.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class CatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20200809055550_Bottle")]
+    partial class Bottle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Bottle", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Capacity");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<double>("Price");
-
-                    b.Property<DateTime>("UpdatedAt");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Bottles");
-                });
 
             modelBuilder.Entity("WhiteBear.Services.Catalog.Api.Data.Entities.Brand", b =>
                 {
