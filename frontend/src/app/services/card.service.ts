@@ -36,6 +36,23 @@ export class CardService {
     this.card$.next(card);
   }
 
+  public updateQuantityInCard(quantity: number, product: Product, bottles: Bottle[]): CardItem {
+    let totalBottlesPrice = this.calcCardItemTotalBottlesPrice(bottles);
+    
+    var card = this.card$.value;
+
+    let item = card.items.find((item) => item.product.id == product.id);
+
+    if (item !== null && item !== undefined) {
+      item.quantity = quantity;
+      item.totalBottlesPrice = totalBottlesPrice;
+      card.totalPrice = this.calcCardTotalPrice(card);
+
+      this.card$.next(card);
+      return item;
+    } 
+  }
+
   public deleteFromCard(product: Product) {
     var card = this.card$.value;
 
