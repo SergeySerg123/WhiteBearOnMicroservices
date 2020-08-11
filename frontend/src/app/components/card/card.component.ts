@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CardItem } from 'src/app/models/card/card-item';
 import { Product } from 'src/app/models/product/product';
+import { BottleService } from 'src/app/services/bottle.service';
+import { Bottle } from 'src/app/models/bottle/bottle';
 
 @Component({
   selector: 'app-card',
@@ -22,9 +24,8 @@ export class CardComponent implements OnInit, OnDestroy {
   
   public unsubscribe$ = new Subject<any>();
 
-  public quantity = 1;
-
-  constructor(private cardService: CardService) { }
+  constructor(private cardService: CardService,
+    private bottleService: BottleService) { }
 
   ngOnInit(): void {
     this.cardService.card$
@@ -48,8 +49,11 @@ export class CardComponent implements OnInit, OnDestroy {
     this.cardService.deleteFromCard(product);
   }
 
-  public setQuantity(quantity: number) {
-    this.quantity = quantity;
+  public setQuantity(quantity: number, product: Product) {
+    // this.quantity = quantity;
+    let bottles: Bottle[] = this.bottleService.calcBottles(quantity);
+    let updatedItem: CardItem = this.cardService.updateQuantityInCard(quantity, product, bottles);
+    this.parseBottlesAsInformStr(updatedItem);
   }
 
   public parseBottlesAsInformStr(cardItem: CardItem): string {
@@ -71,7 +75,6 @@ export class CardComponent implements OnInit, OnDestroy {
     let result: string = props > 1 ? "Бутылки, " : "Бутылка, ";
     for (let volume in occurrences) {
       count++;
-      console.log("props: " + props, 'count: ' + count);
       result += `${volume} л. ${occurrences[volume]} шт. ${props === count ? '' : ','}`;
     }
 
