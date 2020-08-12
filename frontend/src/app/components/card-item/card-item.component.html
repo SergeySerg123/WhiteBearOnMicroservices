@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card-item-img">
+                <img src="{{cardItem.product.previewImg}}" />
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card-item-details">
+                <div class="top-container">
+                    <div class="card-item-name d-inline-block">
+                        {{cardItem.product.name}}
+                    </div>
+                    <div class="card-item-total-price d-inline-block text-right">
+                        {{cardItem.totalPrice}}
+                        <span> грн.</span>
+                    </div>
+                </div>
+                
+                <div class="card-item-counter-container pl-3 d-inline-block">
+                    <app-counter
+                        [quantity]="cardItem.quantity"
+                        (quantityEvent)="setQuantity($event, cardItem.product)"
+                    ></app-counter>
+                </div>
+
+                <div class="card-delete-item-container">
+                    <fa-icon [icon]="faTimes"
+                        (click)="deleteFromCard()"
+                        class="cursor-pointer card-delete-item-btn" ></fa-icon>
+                </div>
+
+                <div class="bottle-about-area d-inline-block">
+                    <p>{{ parseBottlesAsInformStr() }} </p>
+                </div>
+
+                <div class="card-item-total-price bottle-price d-inline-block text-right">
+                    {{ cardItem.totalBottlesPrice }}
+                    <span> грн.</span>
+                </div>
+            </div>  
+             
+        </div>
+    </div>
+</div>

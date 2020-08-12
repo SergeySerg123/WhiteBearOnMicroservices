@@ -34,8 +34,8 @@ export class BottleService implements OnInit, OnDestroy {
 
   public calcBottles(quantity: number): Bottle[] {
     let bottle = this.bottles.filter( (bottle) => bottle.capacity === quantity );
-    
-    if (bottle !== null && bottle !== undefined) {
+
+    if (bottle.length > 0) {
       return  [...bottle];
     }
 

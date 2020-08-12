@@ -4,6 +4,7 @@ import { Card, initialCardState } from '../models/card/card';
 import { CardItem } from '../models/card/card-item';
 import { BehaviorSubject } from 'rxjs';
 import { Bottle } from '../models/bottle/bottle';
+import { additionReducer } from '../helpers/addition.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,7 @@ export class CardService {
   constructor() { }
 
   public addToCard(product: Product, quantity: number, bottles: Bottle[]) {
-    let totalBottlesPrice = this.calcCardItemTotalBottlesPrice(bottles);
-    
-    let newItem: CardItem = {product, quantity, bottles, totalBottlesPrice};
+    let totalBottlesPrice = this.calcCardItemTotalBottlesPrice(bottles);    
     
     var card = this.card$.value;
 
@@ -27,7 +26,10 @@ export class CardService {
       item.quantity += quantity;
       item.bottles = [...item.bottles, ...bottles];
       item.totalBottlesPrice = item.totalBottlesPrice + totalBottlesPrice;
+      item.totalPrice = this.calcCardItemTotalPrice(item.product.price, item.quantity, item.totalBottlesPrice);
     } else {
+      let totalPrice =  this.calcCardItemTotalPrice(product.price, quantity, totalBottlesPrice);
+      let newItem: CardItem = {product, quantity, bottles, totalBottlesPrice, totalPrice};
       card.items.push(newItem);
     }    
     
@@ -45,7 +47,9 @@ export class CardService {
 
     if (item !== null && item !== undefined) {
       item.quantity = quantity;
+      item.bottles = bottles;
       item.totalBottlesPrice = totalBottlesPrice;
+      item.totalPrice = this.calcCardItemTotalPrice(item.product.price, item.quantity, item.totalBottlesPrice);
       card.totalPrice = this.calcCardTotalPrice(card);
 
       this.card$.next(card);
@@ -65,23 +69,19 @@ export class CardService {
   }
 
   private calcCardItemTotalBottlesPrice(bottles: Bottle[]): number {
-    let bottleReducer = (accumulator: Bottle, currentValue: Bottle) => {
-      return {capacity: 0, price: accumulator.price + currentValue.price} as Bottle;
-    } 
-    
-    let totalBottlesPrice = bottles.reduce(bottleReducer).price;
+    let totalBottlesPrice = +bottles.reduce(additionReducer).price.toFixed(2);
     return totalBottlesPrice;
+  }
+
+  private calcCardItemTotalPrice(productPrice: number, quantity: number, bottlesPrice: number) {
+    return +(+(quantity * productPrice).toFixed(2) + bottlesPrice).toFixed(2);
   }
 
   private calcCardTotalPrice(card: Card): number {
     let totalPrice = 0;
-
-    let bottleReducer = (accumulator: Bottle, currentValue: Bottle) => {
-      return {capacity: 0, price: accumulator.price + currentValue.price} as Bottle;
-    } 
     
     card.items.forEach( (cardItem) => {
-      let totalBottlePrice = cardItem.bottles.reduce(bottleReducer).price;
+      let totalBottlePrice = cardItem.bottles.reduce(additionReducer).price;
       totalPrice += cardItem.product.price * cardItem.quantity + totalBottlePrice;
     } );
 

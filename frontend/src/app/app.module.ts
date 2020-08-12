@@ -15,6 +15,7 @@ import { CounterComponent } from './components/counter/counter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './components/common/material-components/material-components.module';
 import { BottleDialogComponent } from './components/bottle-dialog/bottle-dialog.component';
+import { CardItemComponent } from './components/card-item/card-item.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BottleDialogComponent } from './components/bottle-dialog/bottle-dialog.
     LeftMenuComponent,
     CatalogProductItemComponent,
     CounterComponent,
-    BottleDialogComponent
+    BottleDialogComponent,
+    CardItemComponent
   ],
   imports: [
     BrowserModule,

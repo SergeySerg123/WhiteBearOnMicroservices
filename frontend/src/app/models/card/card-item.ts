@@ -6,4 +6,5 @@ export interface CardItem {
     quantity: number;
     bottles: Bottle[];
     totalBottlesPrice: number;
+    totalPrice: number;
 }
