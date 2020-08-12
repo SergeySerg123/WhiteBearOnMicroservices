@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WhiteBear.Services.Catalog.Api.Data.Context;
 using WhiteBear.Services.Catalog.Api.Extensions;
 using WhiteBear.Services.Catalog.Api.Filters;
 
@@ -22,17 +23,18 @@ namespace WhiteBear.Services.Catalog.Api
             services.RegisterCustomServices();
             services.RegisterAutoMapper();
             services.RegisterCustomDbConnection(Configuration);
-            services.SeedCustomData();
 
             services.AddSwaggerGen(options =>
             {
                 options.DescribeAllEnumsAsStrings();
                 options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
                 {
-                    Title = "Product catalog API for ShopOnMicroservices",
+                    Title = "Catalog API for WhiteBearOnMicroservices",
                     Version = "v1"
                 });
             });
+
+            services.AddCors();
 
             services.AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)));
         }
@@ -47,11 +49,18 @@ namespace WhiteBear.Services.Catalog.Api
                 app.UseSwagger()
                    .UseSwaggerUI(c =>
                    {
-                       c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductCatalogAPI v1");
+                       c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v1");
                    });
             }
+            app.UseCors(builder => builder
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithExposedHeaders("Token-Expired")
+                .AllowCredentials()
+                .WithOrigins("http://localhost:4200"));
 
             app.UseMvc();
+            SeedData.EnsurePopulated(app).Wait();
         }
     }
 }

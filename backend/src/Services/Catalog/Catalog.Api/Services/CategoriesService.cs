@@ -18,19 +18,20 @@ namespace WhiteBear.Services.Catalog.Api.Services
             _categoriesRepository = categoriesRepository;
         }
 
-        public async Task<Category[]> GetCategories()
+        public async Task<CategoryDTO[]> GetCategories()
         {
-            return await _categoriesRepository.GetCategories();
+            var categories = await _categoriesRepository.GetCategories();
+            return _mapper.Map<CategoryDTO[]>(categories);
         }
 
-        public async Task<Category> GetCategoryById(string id)
+        public async Task<CategoryDTO> GetCategoryById(string id)
         {
             var category = await _categoriesRepository.GetCategoryItem(id);
             if (category == null)
             {
                 throw new NotFoundEntityException($"Category with id: {id} not found.");
             }
-            return category;
+            return _mapper.Map<CategoryDTO>(category);
         }
 
         public async Task CreateCategory(NewCategoryDTO newCategoryDTO)

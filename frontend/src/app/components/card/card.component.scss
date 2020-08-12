@@ -13,8 +13,8 @@
     padding: 20px 40px;
     transition: ease-in-out all 0.3s;
 
-    svg {
-        color: $blue;
+    .svg {
+        color: $darkBlue;
     }
 
     .card-logo {
@@ -25,21 +25,49 @@
 }
 
 .card-items-area {
-    position: relative;
-    height: 60%;
-
-    .card-delete-item-btn {
-        position: relative;
-        top: 40px;
-        left: -20px;
-        
-        
-    }
-
+    height: 70%;
+    overflow-y: auto;
 }
 
+.card-items-area::-webkit-scrollbar {
+    width: 4px;
+  }
+   
+  .card-items-area::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  .card-items-area::-webkit-scrollbar-thumb {
+    background-color: $darkBlue;
+    outline: 1px solid slategrey;
+  }
+
 .card-sum-area {
-    height: 40%;
+    height: 30%;
+    padding-top: 20px;
+
+    .top-container {
+        width: 100%;
+        font-weight: normal;
+        font-size: 24pt;
+    }
+
+    .card-item-total-price {
+        width: 30%;
+
+        span {
+            font-weight: normal;
+            font-size: 16pt;
+        }
+    }
+
+    .total-item-name {
+        width: 70%;
+    }
+
+    .item-total-price {
+        width: 30%;
+    }
 }
 
 .is-opened-card {

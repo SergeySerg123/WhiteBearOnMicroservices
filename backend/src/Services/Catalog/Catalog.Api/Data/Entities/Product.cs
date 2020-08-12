@@ -4,7 +4,7 @@ using WhiteBear.Services.Catalog.Api.Enums;
 
 namespace WhiteBear.Services.Catalog.Api.Data.Entities
 {
-    public sealed class ProductItem : BaseEntity
+    public sealed class Product : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,11 +14,10 @@ namespace WhiteBear.Services.Catalog.Api.Data.Entities
         public double Density { get; set; } 
         public string ImageId { get; set; }
         public Image PreviewImg { get; set; }
-        public string CategoryId { get; set; }
-        public Category Category { get; set; }
         public string BrandId { get; set; }
         public Brand Brand { get; set; }
-        public string ReactionId { get; set; }
+        public string CategoryId { get; set; }
+        public Category Category { get; set; }
         public ICollection<Reaction> Reactions { get; set; }
     }
 }

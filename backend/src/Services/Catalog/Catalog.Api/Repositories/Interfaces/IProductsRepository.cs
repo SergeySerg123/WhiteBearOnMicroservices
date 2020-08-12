@@ -6,10 +6,10 @@ namespace WhiteBear.Services.Catalog.Api.Repositories.Interfaces
 {
     public interface IProductsRepository
     {
-        Task<ProductItem[]> GetProducts(string categoryId, string brandId, EnumBeerTypes type, int pageSize,int pageIndex);
-        Task<ProductItem> GetProductItem(string id);
-        Task CreateProduct(ProductItem item);
-        Task UpdateProduct(ProductItem item);
-        Task DeleteProduct(ProductItem item);
+        Task<Product[]> GetProducts(string categoryId, string brandId, EnumBeerTypes type, int pageSize,int pageIndex);
+        Task<Product> GetProductItem(string id);
+        Task CreateProduct(Product item);
+        Task UpdateProduct(Product item);
+        Task DeleteProduct(Product item);
     }
 }

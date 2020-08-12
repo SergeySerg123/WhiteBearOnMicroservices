@@ -6,6 +6,7 @@ using static WhiteBear.Services.Catalog.Api.Extensions.Utils;
 using WhiteBear.Services.Catalog.Api.Repositories.Interfaces;
 using WhiteBear.Services.Catalog.Api.Services.Abstract;
 using WhiteBear.Services.Catalog.Api.Enums;
+using WhiteBear.Services.Catalog.Api.Infrastructure.Exceptions;
 
 namespace WhiteBear.Services.Catalog.Api.Services
 {
@@ -18,24 +19,47 @@ namespace WhiteBear.Services.Catalog.Api.Services
             _productsRepository = productsRepository;
         }
 
-        public async Task<ProductItemDTO[]> GetProducts(string categoryId, string brandId, int type,
+        public async Task<ProductDTO[]> GetProducts(string categoryId, string brandId, int type,
             int pageSize, int pageIndex)
         {
             EnumBeerTypes beerType = GetEnumBeerTypeFromIntType(type);
             var products = await _productsRepository.GetProducts(categoryId, brandId, beerType, pageSize, pageIndex);
-            return _mapper.Map<ProductItemDTO[]>(products);
+            if (products == null)
+            {
+                throw new NotFoundEntityException("No products");
+            }
+            return _mapper.Map<ProductDTO[]>(products);
         }
 
-        public async Task CreateProduct(NewProductItemDTO newProductItemDTO)
+        public async Task<ProductDTO> GetProduct(string id)
         {
-            var productItem = _mapper.Map<ProductItem>(newProductItemDTO);        
+            var product = await _productsRepository.GetProductItem(id);
+            if (product == null)
+            {
+                throw new NotFoundEntityException($"product with id '{id}' was not found.");
+            }
+            return _mapper.Map<ProductDTO>(product);
+        }
+
+        public async Task CreateProduct(NewProductDTO newProductItemDTO)
+        {
+            var productItem = _mapper.Map<Product>(newProductItemDTO);
+            if (productItem.Name == null  || productItem.BrandId == null || productItem.CategoryId == null)
+            {
+                throw new NullPropsEntityException("Properties 'Name, CategoryId, BrandId' can't be a null.");
+            }
             await _productsRepository.CreateProduct(productItem);
         }
 
-        public async Task UpdateProduct(ProductItemDTO productItemDTO)
+        public async Task UpdateProduct(ProductDTO productItemDTO)
         {
-            var productItem = _mapper.Map<ProductItem>(productItemDTO);
+            var productItem = _mapper.Map<Product>(productItemDTO);
             var oldProductItem = await _productsRepository.GetProductItem(productItem.Id);
+
+            if (productItem.Id == null || productItem.Name == null || productItem.CategoryId == null || productItem.BrandId == null)
+            {
+                throw new NullPropsEntityException("Properties 'Id, Name, CategoryId, BrandId' can't be a null.");
+            }
 
             oldProductItem.Name = productItem.Name;
             oldProductItem.Description = productItem.Description;
@@ -44,8 +68,8 @@ namespace WhiteBear.Services.Catalog.Api.Services
             oldProductItem.BeerType = productItem.BeerType;
             oldProductItem.Density = productItem.Density;
             oldProductItem.PreviewImg = productItem.PreviewImg;
-            oldProductItem.CategoryId = productItem.CategoryId;
             oldProductItem.BrandId = productItem.BrandId;
+            oldProductItem.CategoryId = productItem.CategoryId;
             oldProductItem.UpdatedAt = productItem.CreatedAt;
 
             await _productsRepository.UpdateProduct(oldProductItem);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -10,16 +10,16 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 export class LeftMenuComponent implements OnInit {
   public faTimes = faTimes;
 
-  @Input() public isOpenedMenu: boolean = false;
-  @Input() public navbarToggle: boolean = false;
+  @Input() public isOpenedMenu: boolean;
+  @Output() public toggle = new EventEmitter<void>();
+
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public toggle(){
-
+  public toggleNavbar(){
+    this.toggle.emit();
   }
-
 }

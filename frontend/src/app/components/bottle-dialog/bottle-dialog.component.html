@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{ product.previewImg }}" />
+        </div>
+        <div class="col-10">
+            <div class="color-blue text-right mt-2 ml-3">
+                <fa-icon [icon]="faTimes"
+                    class="cursor-pointer"
+                    (click)="closeDialog()"
+                    size="2x" ></fa-icon>
+            </div> 
+            <div class="beer-title">
+                {{product.name}}
+            </div>
+
+            <div class="price-and-counter">
+                <div class="d-inline-block">
+                    <span class="price">{{product.price}}</span> грн
+                </div>
+                <div class="ml-2 d-inline-block">
+                    <app-counter></app-counter>
+                </div>
+                <div class="bottle-title">Розлити до тари</div>
+            </div>
+            <hr/>
+            <div class="bottle-options-area">
+                <div class="bottle-container">
+                    <div class="bottle-container-name">
+                        Бутылка, 2 л
+                    </div>
+                    <div class="bottle-icon">
+                        <fa-icon [icon]="faTimes" ></fa-icon>
+                    </div>
+                    <div class="bottle-select-list">
+                        <select name="" id="">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>

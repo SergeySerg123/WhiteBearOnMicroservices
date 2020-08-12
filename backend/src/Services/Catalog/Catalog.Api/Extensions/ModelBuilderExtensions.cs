@@ -5,51 +5,36 @@ namespace WhiteBear.Services.Catalog.Api.Extensions
 {
     public static class ModelBuilderExtensions
     {
-        public static void Configure(this ModelBuilder modelBuilder)
+        public static void ConfigureRelationships(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductItem>()
+            modelBuilder.Entity<Product>()
                 .HasMany(p => p.Reactions)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
+                .WithOne(r => r.Product)
+                .OnDelete(DeleteBehavior.Restrict);               
 
-            modelBuilder.Entity<ProductItem>()
+            modelBuilder.Entity<Product>()
                 .HasOne(p => p.Brand)
-                .WithMany()
+                .WithMany(b => b.ProductItems)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(b => b.BrandId);
 
-            modelBuilder.Entity<ProductItem>()
-                .HasOne(p => p.Category)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<Reaction>()
-                .HasOne(r => r.ProductItem)
-                .WithMany()
+                .HasOne(r => r.Product)
+                .WithMany(p => p.Reactions)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasForeignKey(r => r.ProductItemId);
-
-            modelBuilder.Entity<Category>()
-                .HasMany(c => c.ProductItems)
-                .WithOne()
-                .HasForeignKey(c => c.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(r => r.ProductId);
 
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Brands)
-                .WithOne()
+                .WithOne(c => c.Category)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(c => c.CategoryId);
 
-            modelBuilder.Entity<Brand>()
-                .HasOne(b => b.Category)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Brand>()
-                .HasMany(b => b.ProductItems)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
-        }
+            modelBuilder.Entity<Category>()
+                .HasMany(c => c.Products)
+                .WithOne(c => c.Category)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasForeignKey(c => c.CategoryId);
+        }       
     }
 }

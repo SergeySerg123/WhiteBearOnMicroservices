@@ -1,0 +1,34 @@
+@import '../../../variables.scss'; 
+
+.counter-body {
+    background-color: #fff;
+    border: 1px gray solid;
+    border-radius: 5px;
+    padding: 0 10px;
+    min-width: 80px;
+    max-width: 100px;
+    height: 40px;
+    color: gray;
+    padding-top: 5px;
+    transition: all 0.2s ease-in-out;
+
+    svg {
+        cursor: pointer;
+        transition: 0.2s all ease-in;
+    }
+
+    svg:hover {
+        color: $blue;
+        transform: scale(1.2);
+    }
+
+    .counter-num {
+        transition: all 0.2s ease-in-out;
+        color: $darkBlue;
+    }
+
+}
+
+.counter-body:hover {
+    border: 1px $darkBlue solid;
+}

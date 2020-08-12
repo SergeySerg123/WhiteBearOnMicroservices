@@ -16,20 +16,28 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
             _productsService = productsService;
         }
 
-        //GET: /api/products/items/categories/{categoryId}/brands/{brandId}/types/{type}?pageSize=50&pageIndex=1
+        //GET: /api/products/items?categoryId={categoryId}&brandId={brandId}&type={type}&pageSize=50&pageIndex=1
         [HttpGet]
-        [Route("items/category/{category}/brand/{brand}/type/{type}")]
-        public async Task<IActionResult> GetProducts(string categoryId, string brandId, int type,
+        [Route("items")]
+        public async Task<IActionResult> GetProducts([FromQuery]string categoryId = null, [FromQuery]string brandId = null, [FromQuery]int type = 3,
             [FromQuery] int pageSize = 50, [FromQuery]int pageIndex = 0)
         {
             var products = await _productsService.GetProducts(categoryId, brandId, type, pageSize, pageIndex);
             return Ok(products);
         }
 
+        [HttpGet]
+        [Route("items/{id}")]
+        public async Task<IActionResult> GetProduct(string id)
+        {
+            var product = await _productsService.GetProduct(id);
+            return Ok(product);
+        }
+
         //POST: /api/products/items
         [HttpPost]
         [Route("items")]
-        public async Task<IActionResult> CreateProduct([FromBody]NewProductItemDTO newProductItemDTO)
+        public async Task<IActionResult> CreateProduct([FromBody]NewProductDTO newProductItemDTO)
         {
             if (newProductItemDTO == null)
             {
@@ -41,8 +49,8 @@ namespace WhiteBear.Services.Catalog.Api.Controllers
 
         //PUT: /api/products/items/{id}
         [HttpPut]
-        [Route("items/{id}")]
-        public async Task<IActionResult> UpdateProduct(ProductItemDTO productItemDTO)
+        [Route("items")]
+        public async Task<IActionResult> UpdateProduct(ProductDTO productItemDTO)
         {
             await _productsService.UpdateProduct(productItemDTO);
             return NoContent();

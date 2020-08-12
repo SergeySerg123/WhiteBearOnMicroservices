@@ -1,6 +1,6 @@
 ﻿namespace WhiteBear.Services.Catalog.Api.Data.DTO.ProductItem
 {
-    public sealed class NewProductItemDTO
+    public sealed class NewProductDTO
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -14,10 +14,10 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
     {
         public ProductsRepository(CatalogContext context) : base(context) { }
 
-        public async Task<ProductItem[]> GetProducts(string categoryId, string brandId, EnumBeerTypes type,
+        public async Task<Product[]> GetProducts(string categoryId, string brandId, EnumBeerTypes type,
             int pageSize, int pageIndex)
         {
-            IQueryable<ProductItem> query = _context.ProductItems;
+            IQueryable<Product> query = _context.ProductItems;
             
             if(categoryId != null)
             {
@@ -36,6 +36,8 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
 
             var items = await query.Include(p => p.Reactions)  
                 .Include(p => p.Brand)
+                .Include(p => p.PreviewImg)
+                .Include(p => p.Reactions)
                 .Include(p => p.Category)
                 .Skip(pageIndex)
                 .Take(pageSize)
@@ -45,22 +47,22 @@ namespace WhiteBear.Services.Catalog.Api.Repositories
             return items;
         }
 
-        public async Task<ProductItem> GetProductItem(string id)
+        public async Task<Product> GetProductItem(string id)
         {
             return await _context.ProductItems.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task CreateProduct(ProductItem item)
+        public async Task CreateProduct(Product item)
         {
             await base.CreateEntity(item);
         }
 
-        public async Task UpdateProduct(ProductItem item)
+        public async Task UpdateProduct(Product item)
         {
             await base.UpdateEntity(item);
         }      
 
-        public async Task DeleteProduct(ProductItem item)
+        public async Task DeleteProduct(Product item)
         {
             await base.DeleteEntity(item);
         }

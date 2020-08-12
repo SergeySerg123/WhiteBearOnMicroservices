@@ -5,7 +5,7 @@ using WhiteBear.Services.Catalog.Api.Data.DTO.Reaction;
 
 namespace WhiteBear.Services.Catalog.Api.Data.DTO.ProductItem
 {
-    public sealed class ProductItemDTO
+    public sealed class ProductDTO
     {
         public string Id { get; set; }
         public string Name { get; set; }

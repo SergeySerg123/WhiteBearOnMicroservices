@@ -10,12 +10,13 @@ namespace WhiteBear.Services.Catalog.Api.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Configure();
+            modelBuilder.ConfigureRelationships();
         }
 
-        public DbSet<ProductItem> ProductItems { get; set; }
+        public DbSet<Product> ProductItems { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
+        public DbSet<Bottle> Bottles { get; set; }
     }
 }

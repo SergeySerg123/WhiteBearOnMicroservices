@@ -17,19 +17,24 @@ namespace WhiteBear.Services.Catalog.Api.Services
             _brandsRepository = brandsRepository;
         }
 
-        public async Task<Brand[]> GetBrands()
+        public async Task<BrandDTO[]> GetBrands()
         {
-            return await _brandsRepository.GetBrands();
+            var brands = await _brandsRepository.GetBrands();
+            if (brands == null)
+            {
+                throw new NotFoundEntityException($"No brands.");
+            }
+            return _mapper.Map<BrandDTO[]>(brands);
         }
 
-        public async Task<Brand> GetBrandById(string id)
+        public async Task<BrandDTO> GetBrandById(string id)
         {
             var brand = await _brandsRepository.GetBrandItem(id);
             if (brand == null)
             {
                 throw new NotFoundEntityException($"Brand with id: {id} not found.");
             }
-            return brand;
+            return _mapper.Map<BrandDTO>(brand);
         }
 
         public async Task CreateBrand(NewBrandDTO newBrandDTO)

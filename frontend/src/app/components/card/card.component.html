@@ -2,7 +2,33 @@
     [ngClass]="{'is-opened-card': isOpenedCard}"
     [ngClass]="{'is-closed-card': !isOpenedCard}"
     >
+
+    <div class="mt-2 ml-3 svg">
+        <fa-icon [icon]="faTimes"
+            class="cursor-pointer"
+            (click)="toggleCard()" 
+            size="2x" ></fa-icon>
+    </div> 
+
+    <div class="card-items-area mt-2">
+        <div class="card-item mt-2 mb-2" *ngFor="let cardItem of items">
+            <app-card-item
+                (emitQuantity)="setQuantity($event)"
+                (emitDeleteFromCard)="deleteFromCard($event)"
+                [cardItem]="cardItem"
+            ></app-card-item>
+        </div>
+    </div>
+    <hr />
     <div class="card-sum-area">
-        
+        <div class="top-container">
+            <div class="total-item-name d-inline-block">
+                Итого к оплате:
+             </div>
+             <div class="item-total-price d-inline-block text-right">
+                 {{totalPrice}}
+                 <span> грн.</span>
+             </div>
+        </div>
     </div>
 </div>
