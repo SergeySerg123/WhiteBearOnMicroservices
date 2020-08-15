@@ -8,6 +8,7 @@ import { BottleService } from 'src/app/services/bottle.service';
 import { Bottle } from 'src/app/models/bottle/bottle';
 import { QuantityChanger } from 'src/app/models/common/quantity-changer.model';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import '../../../assets/pics/WB-logo.jpg';
 
 @Component({
   selector: 'app-card',
@@ -21,6 +22,7 @@ export class CardComponent implements OnInit, OnDestroy {
   @Output() public toggle = new EventEmitter<void>();
 
   public totalPrice = 0;
+  public hasItems: boolean = false;
   public items: CardItem[] = new Array<CardItem>();
   
   public unsubscribe$ = new Subject<any>();
@@ -34,6 +36,7 @@ export class CardComponent implements OnInit, OnDestroy {
       .subscribe(card => {
         this.totalPrice = card.totalPrice;
         this.items = card.items;
+        this.hasItems = this.items.length > 0;
       });
   }
 

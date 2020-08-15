@@ -1,5 +1,25 @@
 @import '../../../variables.scss'; 
 
+.card-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+   
+    width: 100%;
+    height: 100%;
+
+    img {
+        position: relative;
+        top: -10px;
+        opacity: 0.3;
+    }
+
+    .card-logo-button {
+        cursor: pointer;
+    }
+}
+
 .card-area {
     height: 100%;
     width: 700px;
@@ -16,16 +36,10 @@
     .svg {
         color: $darkBlue;
     }
-
-    .card-logo {
-        position: absolute;
-        top: 50%;
-        opacity: 0.2;
-    }
 }
 
 .card-items-area {
-    height: 70%;
+    height: 60%;
     overflow-y: auto;
 }
 
@@ -43,8 +57,12 @@
   }
 
 .card-sum-area {
-    height: 30%;
+    height: 40%;
     padding-top: 20px;
+
+    .btn-lg {
+        cursor: pointer;
+    }
 
     .top-container {
         width: 100%;
@@ -67,6 +85,10 @@
 
     .item-total-price {
         width: 30%;
+    }
+
+    .btn-order-dark-blue {
+        color: $darkBlue;
     }
 }
 

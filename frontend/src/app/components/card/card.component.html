@@ -10,17 +10,26 @@
             size="2x" ></fa-icon>
     </div> 
 
-    <div class="card-items-area mt-2">
+    <div *ngIf="!hasItems" class="card-logo">
+        <img src="../../../assets/pics/WB-logo.jpg" />
+
+        <div class="text-center card-logo-button" (click)="toggleCard()" >
+            <div class="btn-lg text-white  btn-primary btn-order-dark-blue">Начать покупки</div>
+        </div>
+    </div>
+
+    <div class="card-items-area mt-2" *ngIf="hasItems">
         <div class="card-item mt-2 mb-2" *ngFor="let cardItem of items">
             <app-card-item
                 (emitQuantity)="setQuantity($event)"
                 (emitDeleteFromCard)="deleteFromCard($event)"
                 [cardItem]="cardItem"
             ></app-card-item>
+            <hr />
         </div>
     </div>
-    <hr />
-    <div class="card-sum-area">
+    <hr *ngIf="hasItems" />
+    <div class="card-sum-area" *ngIf="hasItems">
         <div class="top-container">
             <div class="total-item-name d-inline-block">
                 Итого к оплате:
@@ -29,6 +38,14 @@
                  {{totalPrice}}
                  <span> грн.</span>
              </div>
+
+             <div class="text-center mt-5 mb-2">
+                <div class="btn-lg text-white  btn-secondary">Продолжить покупки</div>
+            </div>
+
+             <div class="text-center mt-2 mb-2">
+                <div class="btn-lg text-white  btn-primary btn-order-dark-blue">Оформить заказ</div>
+            </div>
         </div>
     </div>
 </div>
